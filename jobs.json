@@ -1,0 +1,314 @@
+[
+  {
+    "job_id": "e58fdc77da42427494eae4edd142f7d3",
+    "text": "text",
+    "interpretation": {
+      "clean_text": "text",
+      "language": "ro",
+      "segments": [
+        "text"
+      ],
+      "stats": {
+        "chars": 4,
+        "words": 1,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": null,
+      "rate": 175,
+      "volume": 1.0,
+      "lang": "ro"
+    },
+    "output_path": null,
+    "created_at_iso": "2026-02-10T19:01:20.661717+00:00"
+  },
+  {
+    "job_id": "edecaf850dbd49f4bb65bbec1bfca329",
+    "text": "multumesc pentru ajutor",
+    "interpretation": {
+      "clean_text": "multumesc pentru ajutor",
+      "language": "ro",
+      "segments": [
+        "multumesc pentru ajutor"
+      ],
+      "stats": {
+        "chars": 23,
+        "words": 3,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": null,
+      "rate": 175,
+      "volume": 1.0,
+      "lang": "ro"
+    },
+    "output_path": null,
+    "created_at_iso": "2026-02-10T19:01:41.665152+00:00"
+  },
+  {
+    "job_id": "8e7d1da1f311421d834781cf4529d355",
+    "text": "multumesc",
+    "interpretation": {
+      "clean_text": "multumesc",
+      "language": "ro",
+      "segments": [
+        "multumesc"
+      ],
+      "stats": {
+        "chars": 9,
+        "words": 1,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": null,
+      "rate": 175,
+      "volume": 1.0,
+      "lang": "ro"
+    },
+    "output_path": null,
+    "created_at_iso": "2026-02-10T19:01:49.843919+00:00"
+  },
+  {
+    "job_id": "50b7039b08b5420c994029216248e3d5",
+    "text": "text",
+    "interpretation": {
+      "clean_text": "text",
+      "language": "ro",
+      "segments": [
+        "text"
+      ],
+      "stats": {
+        "chars": 4,
+        "words": 1,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": null,
+      "rate": 175,
+      "volume": 1.0,
+      "lang": "ro"
+    },
+    "output_path": null,
+    "created_at_iso": "2026-02-10T19:01:59.068596+00:00"
+  },
+  {
+    "job_id": "81e67e6d772448e7b6bb4a8578fa37c1",
+    "text": "multumesc pentru ajutor",
+    "interpretation": {
+      "clean_text": "multumesc pentru ajutor",
+      "language": "ro",
+      "segments": [
+        "multumesc pentru ajutor"
+      ],
+      "stats": {
+        "chars": 23,
+        "words": 3,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": null,
+      "rate": 175,
+      "volume": 1.0,
+      "lang": "ro"
+    },
+    "output_path": null,
+    "created_at_iso": "2026-02-10T19:02:14.052068+00:00"
+  },
+  {
+    "job_id": "9de7477c89444565a56aee8be7db37f4",
+    "text": "vorbeste",
+    "interpretation": {
+      "clean_text": "vorbeste",
+      "language": "ro",
+      "segments": [
+        "vorbeste"
+      ],
+      "stats": {
+        "chars": 8,
+        "words": 1,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": null,
+      "rate": 175,
+      "volume": 1.0,
+      "lang": "ro"
+    },
+    "output_path": null,
+    "created_at_iso": "2026-02-10T19:11:22.340439+00:00"
+  },
+  {
+    "job_id": "2f05912e7cae46f9976d1dee77511e3e",
+    "text": "vorbește",
+    "interpretation": {
+      "clean_text": "vorbește",
+      "language": "ro",
+      "segments": [
+        "vorbește"
+      ],
+      "stats": {
+        "chars": 8,
+        "words": 1,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": null,
+      "rate": 175,
+      "volume": 1.0,
+      "lang": "ro"
+    },
+    "output_path": null,
+    "created_at_iso": "2026-02-10T19:11:33.578924+00:00"
+  },
+  {
+    "job_id": "bddfdbc2009a4a288499055c5bef650f",
+    "text": "Salut, acesta este un test pentru aplicația VoxText!",
+    "interpretation": {
+      "clean_text": "Salut, acesta este un test pentru aplicația VoxText!",
+      "language": "ro",
+      "segments": [
+        "Salut, acesta este un test pentru aplicația VoxText!"
+      ],
+      "stats": {
+        "chars": 52,
+        "words": 8,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": null,
+      "rate": 175,
+      "volume": 1.0,
+      "lang": "ro"
+    },
+    "output_path": null,
+    "created_at_iso": "2026-02-23T18:02:02.181736+00:00"
+  },
+  {
+    "job_id": "910677dbd34d43f4bea6d6787acd26b0",
+    "text": "Salut, acesta este un test pentru aplicația VoxText!",
+    "interpretation": {
+      "clean_text": "Salut, acesta este un test pentru aplicația VoxText!",
+      "language": "ro",
+      "segments": [
+        "Salut, acesta este un test pentru aplicația VoxText!"
+      ],
+      "stats": {
+        "chars": 52,
+        "words": 8,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": null,
+      "rate": 175,
+      "volume": 1.0,
+      "lang": "ro"
+    },
+    "output_path": null,
+    "created_at_iso": "2026-02-23T18:02:10.257418+00:00"
+  },
+  {
+    "job_id": "186374f63f5d46e3b38b9050304518f6",
+    "text": "Salut, acesta este un test pentru aplicația VoxText!",
+    "interpretation": {
+      "clean_text": "Salut, acesta este un test pentru aplicația VoxText!",
+      "language": "ro",
+      "segments": [
+        "Salut, acesta este un test pentru aplicația VoxText!"
+      ],
+      "stats": {
+        "chars": 52,
+        "words": 8,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": null,
+      "rate": 175,
+      "volume": 1.0,
+      "lang": "ro"
+    },
+    "output_path": null,
+    "created_at_iso": "2026-02-23T18:02:12.825689+00:00"
+  },
+  {
+    "job_id": "e9b50adfb8e94162ab62ac40006bcc72",
+    "text": "Salut, acesta este un test pentru aplicația VoxText!",
+    "interpretation": {
+      "clean_text": "Salut, acesta este un test pentru aplicația VoxText!",
+      "language": "ro",
+      "segments": [
+        "Salut, acesta este un test pentru aplicația VoxText!"
+      ],
+      "stats": {
+        "chars": 52,
+        "words": 8,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": null,
+      "rate": 175,
+      "volume": 1.0,
+      "lang": "ro"
+    },
+    "output_path": null,
+    "created_at_iso": "2026-02-23T18:02:14.217358+00:00"
+  },
+  {
+    "job_id": "6971cbeea1ed48f39f0de564c3ed630f",
+    "text": "Salut, acesta este un test pentru aplicația VoxText!",
+    "interpretation": {
+      "clean_text": "Salut, acesta este un test pentru aplicația VoxText!",
+      "language": "ro",
+      "segments": [
+        "Salut, acesta este un test pentru aplicația VoxText!"
+      ],
+      "stats": {
+        "chars": 52,
+        "words": 8,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": null,
+      "rate": 175,
+      "volume": 1.0,
+      "lang": "ro"
+    },
+    "output_path": null,
+    "created_at_iso": "2026-02-23T18:02:19.447052+00:00"
+  },
+  {
+    "job_id": "3c77e73d1eab412ba08168af7752c358",
+    "text": "Salut, acesta este un test pentru aplicația VoxText!",
+    "interpretation": {
+      "clean_text": "Salut, acesta este un test pentru aplicația VoxText!",
+      "language": "ro",
+      "segments": [
+        "Salut, acesta este un test pentru aplicația VoxText!"
+      ],
+      "stats": {
+        "chars": 52,
+        "words": 8,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": null,
+      "rate": 175,
+      "volume": 1.0,
+      "lang": "ro"
+    },
+    "output_path": null,
+    "created_at_iso": "2026-02-23T18:02:34.285842+00:00"
+  }
+]
