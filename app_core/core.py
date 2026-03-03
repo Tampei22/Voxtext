@@ -32,10 +32,9 @@ class AppCore:
             text=text,
             interpretation=interpretation,
             settings=settings,
-            output_path=None,          
+            output_path=None,
             created_at_iso=created_at,
         )
-
         from storage.jobs import save_job
         save_job(job)
 

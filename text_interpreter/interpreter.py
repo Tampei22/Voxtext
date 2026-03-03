@@ -1,12 +1,11 @@
 import re
 from app_core.models import InterpretationResult
 
-
 _SENT_SPLIT = re.compile(r"(?<=[.!?])\s+")
 
 def normalize_text(text: str) -> str:
-    text = text.replace("\u00A0", " ")          
-    text = re.sub(r"\s+", " ", text).strip()   
+    text = text.replace("\u00A0", " ")
+    text = re.sub(r"\s+", " ", text).strip()
     return text
 
 def detect_language(text: str) -> str:
@@ -30,7 +29,6 @@ def interpret(text: str) -> InterpretationResult:
         "words": len(words),
         "segments": len(segments),
     }
-
     return InterpretationResult(
         clean_text=clean,
         language=lang,
