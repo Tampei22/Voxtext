@@ -3,6 +3,7 @@ from datetime import datetime, timezone
 from stt.base import STTEngine
 
 from app_core.models import TTSJob, TTSSettings
+from storage.paths import make_output_path
 from text_interpreter.interpreter import interpret
 from tts.base import TTSEngine
 
@@ -25,14 +26,16 @@ class AppCore:
         job_id = uuid.uuid4().hex
         created_at = datetime.now(timezone.utc).isoformat()
 
-        self.tts.speak(interpretation.clean_text, settings)
+        saved_path = self.tts.speak(
+            interpretation.clean_text, settings, output_path=make_output_path(job_id)
+        )
 
         job = TTSJob(
             job_id=job_id,
             text=text,
             interpretation=interpretation,
             settings=settings,
-            output_path=None,
+            output_path=saved_path,
             created_at_iso=created_at,
         )
         from storage.jobs import save_job

@@ -6,7 +6,8 @@ class StubTTSEngine(TTSEngine):
     def name(self) -> str:
         return "stub-tts"
 
-    def synthesize_to_file(self, text: str, settings: TTSSettings, out_path: str) -> str:
-        with open(out_path, "wb") as f:
-            f.write(b"")
-        return out_path
+    def speak(self, text: str, settings: TTSSettings, output_path: str | None = None) -> str | None:
+        if output_path:
+            with open(output_path, "wb") as f:
+                f.write(b"")
+        return output_path

@@ -1,0 +1,10 @@
+{
+  "lang": "ro",
+  "voice_id": null,
+  "tts_rate": 175,
+  "tts_volume": 1.0,
+  "stt_pause_threshold": 0.8,
+  "max_history": 50,
+  "theme": "light",
+  "font_scale": 1.0
+}

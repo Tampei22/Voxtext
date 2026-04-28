@@ -10,7 +10,7 @@ class Pyttsx3Engine:
     def name(self) -> str:
         return "pyttsx3 Local Engine"
 
-    def speak(self, text: str, settings) -> None:
+    def speak(self, text: str, settings, output_path: str | None = None) -> str | None:
         rate = settings.rate if (settings and settings.rate) else 175
         volume = settings.volume if (settings and settings.volume is not None) else 1.0
 
@@ -34,6 +34,7 @@ class Pyttsx3Engine:
             print(f"TTS Error: {e}")
         finally:
             self._proc = None
+        return None
 
     def stop(self) -> None:
         proc = self._proc

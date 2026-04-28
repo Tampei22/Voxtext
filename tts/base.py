@@ -8,5 +8,5 @@ class TTSEngine(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def speak(self, text: str, settings: TTSSettings) -> None:
+    def speak(self, text: str, settings: TTSSettings, output_path: str | None = None) -> str | None:
         raise NotImplementedError

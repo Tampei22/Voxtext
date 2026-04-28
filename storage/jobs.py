@@ -28,7 +28,9 @@ def _safe_write_json(path: Path, data: list[dict[str, Any]]) -> None:
     tmp.replace(path)
 
 
-def save_job(job: TTSJob, keep_last: int = 50) -> None:
+def save_job(job: TTSJob) -> None:
+    from storage.settings import load_app_settings
+    keep_last = load_app_settings().max_history
     jobs = _safe_read_json(JOBS_FILE)
 
     record = {
