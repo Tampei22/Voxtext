@@ -1,6 +1,8 @@
 import subprocess
 import sys
 
+from app_core.constants import DEFAULT_TTS_RATE
+
 
 class EdgeTTSEngine:
 
@@ -21,7 +23,6 @@ class EdgeTTSEngine:
     }
 
     def __init__(self, voice: str | None = None):
-    
         self._override_voice = voice
         self._proc: subprocess.Popen | None = None
 
@@ -38,8 +39,8 @@ class EdgeTTSEngine:
             voices = self.VOICES_BY_LANG.get(lang_key, self.VOICES_BY_LANG["ro"])
             voice = voices[0][1]
 
-        rate_val = settings.rate if (settings and settings.rate) else 175
-        rate_pct = int((rate_val - 175) / 175 * 100)
+        rate_val = settings.rate if (settings and settings.rate) else DEFAULT_TTS_RATE
+        rate_pct = int((rate_val - DEFAULT_TTS_RATE) / DEFAULT_TTS_RATE * 100)
         rate_str = f"+{rate_pct}%" if rate_pct >= 0 else f"{rate_pct}%"
 
         out_path_repr = repr(output_path)

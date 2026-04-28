@@ -1,6 +1,11 @@
 import subprocess
 import sys
 
+from app_core.constants import DEFAULT_TTS_RATE, DEFAULT_TTS_VOLUME
+from app_core.logger import get_logger
+
+_logger = get_logger(__name__)
+
 
 class Pyttsx3Engine:
 
@@ -11,8 +16,8 @@ class Pyttsx3Engine:
         return "pyttsx3 Local Engine"
 
     def speak(self, text: str, settings, output_path: str | None = None) -> str | None:
-        rate = settings.rate if (settings and settings.rate) else 175
-        volume = settings.volume if (settings and settings.volume is not None) else 1.0
+        rate = settings.rate if (settings and settings.rate) else DEFAULT_TTS_RATE
+        volume = settings.volume if (settings and settings.volume is not None) else DEFAULT_TTS_VOLUME
 
         script = "\n".join([
             "import pyttsx3",
@@ -31,7 +36,7 @@ class Pyttsx3Engine:
             )
             self._proc.wait()
         except Exception as e:
-            print(f"TTS Error: {e}")
+            _logger.error("pyttsx3 speak failed: %s", e)
         finally:
             self._proc = None
         return None

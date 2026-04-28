@@ -7,6 +7,7 @@ from kivy.uix.label import Label
 from kivy.uix.screenmanager import Screen
 from kivy.uix.textinput import TextInput
 
+from app_core.constants import MAX_TTS_TEXT_LENGTH
 from ui.theme import RoundedButton
 from ui.i18n import load_lang, t
 
@@ -141,6 +142,9 @@ class TTSScreen(Screen):
         text = self.text_input.text.strip()
         if not text:
             self.status_label.text = t('tts_empty')
+            return
+        if len(text) > MAX_TTS_TEXT_LENGTH:
+            self.status_label.text = t('tts_too_long', n=MAX_TTS_TEXT_LENGTH)
             return
         if self.is_speaking:
             return

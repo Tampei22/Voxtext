@@ -2,6 +2,12 @@ import json
 from dataclasses import dataclass, asdict
 from pathlib import Path
 
+from app_core.constants import (
+    DEFAULT_TTS_RATE,
+    DEFAULT_TTS_VOLUME,
+    DEFAULT_STT_PAUSE_THRESHOLD,
+    DEFAULT_MAX_HISTORY,
+)
 from app_core.models import TTSSettings
 from storage.paths import BASE_DIR
 
@@ -14,10 +20,10 @@ _LANG_TO_STT = {"ro": "ro-RO", "ru": "ru-RU", "en": "en-US"}
 class AppSettings:
     lang: str = "ro"
     voice_id: str | None = None
-    tts_rate: int = 175
-    tts_volume: float = 1.0
-    stt_pause_threshold: float = 0.8
-    max_history: int = 50
+    tts_rate: int = DEFAULT_TTS_RATE
+    tts_volume: float = DEFAULT_TTS_VOLUME
+    stt_pause_threshold: float = DEFAULT_STT_PAUSE_THRESHOLD
+    max_history: int = DEFAULT_MAX_HISTORY
     theme: str = "dark"
     font_scale: float = 1.0
 
@@ -42,7 +48,6 @@ def load_app_settings() -> AppSettings:
     try:
         with open(SETTINGS_FILE, "r", encoding="utf-8") as f:
             data = json.load(f)
-        # migrate old format {"tts": {...}}
         if "tts" in data and isinstance(data["tts"], dict):
             tts = data["tts"]
             data = {

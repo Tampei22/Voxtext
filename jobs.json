@@ -1,1 +1,146 @@
-[]
+[
+  {
+    "job_id": "21acfb0a9a5543848f616ec27ca26b66",
+    "text": "textură cunoscut va apărea aici",
+    "interpretation": {
+      "clean_text": "textură cunoscut va apărea aici",
+      "language": "ro",
+      "segments": [
+        "textură cunoscut va apărea aici"
+      ],
+      "stats": {
+        "chars": 31,
+        "words": 5,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": null,
+      "rate": 175,
+      "volume": 1.0,
+      "lang": "ro"
+    },
+    "output_path": "D:\\voxtext\\out\\21acfb0a9a5543848f616ec27ca26b66.mp3",
+    "created_at_iso": "2026-04-28T17:49:45.884176+00:00"
+  },
+  {
+    "job_id": "cd5990c720054ea9a7b38d860115892c",
+    "text": "textură cunoscut va apărea aici",
+    "interpretation": {
+      "clean_text": "textură cunoscut va apărea aici",
+      "language": "ro",
+      "segments": [
+        "textură cunoscut va apărea aici"
+      ],
+      "stats": {
+        "chars": 31,
+        "words": 5,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": null,
+      "rate": 175,
+      "volume": 1.0,
+      "lang": "ro"
+    },
+    "output_path": "D:\\voxtext\\out\\cd5990c720054ea9a7b38d860115892c.mp3",
+    "created_at_iso": "2026-04-28T17:49:52.194661+00:00"
+  },
+  {
+    "job_id": "b4b44fbde7124413b8f53051b3b461f5",
+    "text": "extraterestru",
+    "interpretation": {
+      "clean_text": "extraterestru",
+      "language": "ro",
+      "segments": [
+        "extraterestru"
+      ],
+      "stats": {
+        "chars": 13,
+        "words": 1,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": null,
+      "rate": 175,
+      "volume": 1.0,
+      "lang": "ro"
+    },
+    "output_path": "D:\\voxtext\\out\\b4b44fbde7124413b8f53051b3b461f5.mp3",
+    "created_at_iso": "2026-04-28T17:50:05.374076+00:00"
+  },
+  {
+    "job_id": "cf509d86b6ed4535bd1c9c22dbb9ff4a",
+    "text": "extraterestru",
+    "interpretation": {
+      "clean_text": "extraterestru",
+      "language": "ro",
+      "segments": [
+        "extraterestru"
+      ],
+      "stats": {
+        "chars": 13,
+        "words": 1,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": "ro-RO-EmilNeural",
+      "rate": 175,
+      "volume": 1.0,
+      "lang": "ro"
+    },
+    "output_path": "D:\\voxtext\\out\\cf509d86b6ed4535bd1c9c22dbb9ff4a.mp3",
+    "created_at_iso": "2026-04-28T17:50:26.277010+00:00"
+  },
+  {
+    "job_id": "6032ba048dc34f6784d074b4ec575fb1",
+    "text": "инопришеленец",
+    "interpretation": {
+      "clean_text": "инопришеленец",
+      "language": "ro",
+      "segments": [
+        "инопришеленец"
+      ],
+      "stats": {
+        "chars": 13,
+        "words": 1,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": null,
+      "rate": 175,
+      "volume": 1.0,
+      "lang": "ru"
+    },
+    "output_path": "D:\\voxtext\\out\\6032ba048dc34f6784d074b4ec575fb1.mp3",
+    "created_at_iso": "2026-04-28T17:50:46.694038+00:00"
+  },
+  {
+    "job_id": "02d85ca377e5425ea8176ee35a1f10a0",
+    "text": "текст появится здесь острота заблокировались видео",
+    "interpretation": {
+      "clean_text": "текст появится здесь острота заблокировались видео",
+      "language": "ro",
+      "segments": [
+        "текст появится здесь острота заблокировались видео"
+      ],
+      "stats": {
+        "chars": 50,
+        "words": 6,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": null,
+      "rate": 175,
+      "volume": 1.0,
+      "lang": "ru"
+    },
+    "output_path": "D:\\voxtext\\out\\02d85ca377e5425ea8176ee35a1f10a0.mp3",
+    "created_at_iso": "2026-04-28T17:51:25.673683+00:00"
+  }
+]

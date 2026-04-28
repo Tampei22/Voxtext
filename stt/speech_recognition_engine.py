@@ -1,5 +1,6 @@
 import speech_recognition as sr
 
+from app_core.constants import DEFAULT_STT_PAUSE_THRESHOLD
 from stt.base import STTEngine
 
 
@@ -7,7 +8,7 @@ class SpeechRecognitionEngine(STTEngine):
 
     def __init__(self):
         self.recognizer = sr.Recognizer()
-        self.recognizer.pause_threshold = 0.8
+        self.recognizer.pause_threshold = DEFAULT_STT_PAUSE_THRESHOLD
         self._stop_fn = None
 
     def name(self) -> str:

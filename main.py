@@ -31,6 +31,7 @@ from ui.settings_screen import SettingsScreen
 from app_core.core import AppCore
 from stt.speech_recognition_engine import SpeechRecognitionEngine
 from tts.edge_tts_engine import EdgeTTSEngine
+from tts.pyttsx3_engine import Pyttsx3Engine
 
 
 class VoxTextApp(App):
@@ -39,6 +40,7 @@ class VoxTextApp(App):
         self.app_core = AppCore(
             tts_engine=EdgeTTSEngine(),
             stt_engine=SpeechRecognitionEngine(),
+            fallback_tts=Pyttsx3Engine(),
         )
 
     def build(self):
