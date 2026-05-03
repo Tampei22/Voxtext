@@ -27,8 +27,10 @@ from ui.tts_screen import TTSScreen
 from ui.pdf_screen import PDFScreen
 from ui.history_screen import HistoryScreen
 from ui.settings_screen import SettingsScreen
+from ui.benchmark_screen import BenchmarkScreen
 
 from app_core.core import AppCore
+from stt.whisper_engine import WhisperSTTEngine
 from stt.speech_recognition_engine import SpeechRecognitionEngine
 from tts.edge_tts_engine import EdgeTTSEngine
 from tts.pyttsx3_engine import Pyttsx3Engine
@@ -39,8 +41,9 @@ class VoxTextApp(App):
         super().__init__()
         self.app_core = AppCore(
             tts_engine=EdgeTTSEngine(),
-            stt_engine=SpeechRecognitionEngine(),
+            stt_engine=WhisperSTTEngine(model_size=_startup_settings.whisper_model),
             fallback_tts=Pyttsx3Engine(),
+            fallback_stt=SpeechRecognitionEngine(),
         )
 
     def build(self):
@@ -55,6 +58,7 @@ class VoxTextApp(App):
         sm.add_widget(PDFScreen(self.app_core))
         sm.add_widget(HistoryScreen(self.app_core))
         sm.add_widget(SettingsScreen())
+        sm.add_widget(BenchmarkScreen())
         return sm
 
 

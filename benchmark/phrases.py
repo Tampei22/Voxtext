@@ -1,0 +1,40 @@
+"""Reference phrases used for WER benchmarking, one set per supported language."""
+
+TEST_PHRASES: dict[str, list[str]] = {
+    "ro": [
+        "Bună ziua, cum vă numiți?",
+        "Astăzi este o zi frumoasă afară.",
+        "Vă rog să repetați mai rar.",
+        "Sistemul de recunoaștere vocală funcționează bine.",
+        "Am comandat două cafele și o prăjitură.",
+        "Temperatura de afară este de douăzeci de grade.",
+        "Mâine mergem la munte cu întreaga familie.",
+        "Cartea aceasta este foarte interesantă.",
+        "Deschideți fereastra, vă rog frumos.",
+        "Recunoașterea automată a vorbirii este utilă.",
+    ],
+    "ru": [
+        "Добрый день, как вас зовут?",
+        "Сегодня на улице хорошая погода.",
+        "Пожалуйста, говорите немного медленнее.",
+        "Система распознавания речи работает хорошо.",
+        "Я заказал два кофе и пирожное.",
+        "На улице сегодня двадцать градусов тепла.",
+        "Завтра мы едем в горы всей семьёй.",
+        "Эта книга очень интересная и познавательная.",
+        "Откройте окно, пожалуйста.",
+        "Автоматическое распознавание речи очень полезно.",
+    ],
+    "en": [
+        "Good morning, what is your name?",
+        "Today the weather outside is beautiful.",
+        "Please speak a little more slowly.",
+        "The speech recognition system works very well.",
+        "I ordered two coffees and a pastry.",
+        "The temperature outside is twenty degrees today.",
+        "Tomorrow we are going to the mountains with the whole family.",
+        "This book is very interesting and educational.",
+        "Please open the window.",
+        "Automatic speech recognition is very useful.",
+    ],
+}

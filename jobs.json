@@ -1,16 +1,44 @@
 [
   {
-    "job_id": "21acfb0a9a5543848f616ec27ca26b66",
-    "text": "textură cunoscut va apărea aici",
+    "job_id": "e97123c2df824f40bdb84dd65a905645",
+    "text": "Au trecut lunile si anii. Bradul a crescut din nou, mai puternic si mai intelept decat\ninainte. A invatat sa se bucure de fiecare zi, de fiecare raza de soare si de fiecare\npicatura de ploaie.\nPasarile au venit sa-si faca cuiburi in crengile lui, veveritele veneau sa se joace, iar copiii\ndin sat veneau adesea sa se odihneasca la umbra lui. Bradul era in sfarsit fericit - acasa.",
     "interpretation": {
-      "clean_text": "textură cunoscut va apărea aici",
+      "clean_text": "Au trecut lunile si anii. Bradul a crescut din nou, mai puternic si mai intelept decat inainte. A invatat sa se bucure de fiecare zi, de fiecare raza de soare si de fiecare picatura de ploaie. Pasarile au venit sa-si faca cuiburi in crengile lui, veveritele veneau sa se joace, iar copiii din sat veneau adesea sa se odihneasca la umbra lui. Bradul era in sfarsit fericit - acasa.",
       "language": "ro",
       "segments": [
-        "textură cunoscut va apărea aici"
+        "Au trecut lunile si anii.",
+        "Bradul a crescut din nou, mai puternic si mai intelept decat inainte.",
+        "A invatat sa se bucure de fiecare zi, de fiecare raza de soare si de fiecare picatura de ploaie.",
+        "Pasarile au venit sa-si faca cuiburi in crengile lui, veveritele veneau sa se joace, iar copiii din sat veneau adesea sa se odihneasca la umbra lui.",
+        "Bradul era in sfarsit fericit - acasa."
       ],
       "stats": {
-        "chars": 31,
-        "words": 5,
+        "chars": 380,
+        "words": 69,
+        "segments": 5
+      }
+    },
+    "settings": {
+      "voice_id": null,
+      "rate": 175,
+      "volume": 1.0,
+      "lang": "ro"
+    },
+    "output_path": "D:\\voxtext\\out\\e97123c2df824f40bdb84dd65a905645.mp3",
+    "created_at_iso": "2026-04-28T23:23:27.787720+00:00"
+  },
+  {
+    "job_id": "f01ca1fd48d6462e9638b73ed4ed228f",
+    "text": "Bună ziua Bună ziua scrie în Teza de an studenta câmpii Anastasia",
+    "interpretation": {
+      "clean_text": "Bună ziua Bună ziua scrie în Teza de an studenta câmpii Anastasia",
+      "language": "ro",
+      "segments": [
+        "Bună ziua Bună ziua scrie în Teza de an studenta câmpii Anastasia"
+      ],
+      "stats": {
+        "chars": 65,
+        "words": 12,
         "segments": 1
       }
     },
@@ -20,21 +48,21 @@
       "volume": 1.0,
       "lang": "ro"
     },
-    "output_path": "D:\\voxtext\\out\\21acfb0a9a5543848f616ec27ca26b66.mp3",
-    "created_at_iso": "2026-04-28T17:49:45.884176+00:00"
+    "output_path": null,
+    "created_at_iso": "2026-04-29T06:24:50.241075+00:00"
   },
   {
-    "job_id": "cd5990c720054ea9a7b38d860115892c",
-    "text": "textură cunoscut va apărea aici",
+    "job_id": "1f8800bc4e3245a0ae2f7afa3cf2c68e",
+    "text": "Bună ziua Bună ziua scrie în Teza de an studenta câmpii Anastasia",
     "interpretation": {
-      "clean_text": "textură cunoscut va apărea aici",
+      "clean_text": "Bună ziua Bună ziua scrie în Teza de an studenta câmpii Anastasia",
       "language": "ro",
       "segments": [
-        "textură cunoscut va apărea aici"
+        "Bună ziua Bună ziua scrie în Teza de an studenta câmpii Anastasia"
       ],
       "stats": {
-        "chars": 31,
-        "words": 5,
+        "chars": 65,
+        "words": 12,
         "segments": 1
       }
     },
@@ -44,21 +72,21 @@
       "volume": 1.0,
       "lang": "ro"
     },
-    "output_path": "D:\\voxtext\\out\\cd5990c720054ea9a7b38d860115892c.mp3",
-    "created_at_iso": "2026-04-28T17:49:52.194661+00:00"
+    "output_path": null,
+    "created_at_iso": "2026-04-29T06:24:56.732887+00:00"
   },
   {
-    "job_id": "b4b44fbde7124413b8f53051b3b461f5",
-    "text": "extraterestru",
+    "job_id": "28e87df34dc14e63a3aec4bb5ab196ce",
+    "text": "Teza de an a studentei Anastasia Tampei",
     "interpretation": {
-      "clean_text": "extraterestru",
+      "clean_text": "Teza de an a studentei Anastasia Tampei",
       "language": "ro",
       "segments": [
-        "extraterestru"
+        "Teza de an a studentei Anastasia Tampei"
       ],
       "stats": {
-        "chars": 13,
-        "words": 1,
+        "chars": 39,
+        "words": 7,
         "segments": 1
       }
     },
@@ -68,79 +96,415 @@
       "volume": 1.0,
       "lang": "ro"
     },
-    "output_path": "D:\\voxtext\\out\\b4b44fbde7124413b8f53051b3b461f5.mp3",
-    "created_at_iso": "2026-04-28T17:50:05.374076+00:00"
+    "output_path": "D:\\voxtext\\out\\28e87df34dc14e63a3aec4bb5ab196ce.mp3",
+    "created_at_iso": "2026-04-29T06:25:22.245820+00:00"
   },
   {
-    "job_id": "cf509d86b6ed4535bd1c9c22dbb9ff4a",
-    "text": "extraterestru",
+    "job_id": "61f3f16d06154835b1a26ccbae238be4",
+    "text": "Utilizez edge tts pentru interpretarea textului.",
     "interpretation": {
-      "clean_text": "extraterestru",
+      "clean_text": "Utilizez edge tts pentru interpretarea textului.",
       "language": "ro",
       "segments": [
-        "extraterestru"
+        "Utilizez edge tts pentru interpretarea textului."
       ],
       "stats": {
-        "chars": 13,
-        "words": 1,
-        "segments": 1
-      }
-    },
-    "settings": {
-      "voice_id": "ro-RO-EmilNeural",
-      "rate": 175,
-      "volume": 1.0,
-      "lang": "ro"
-    },
-    "output_path": "D:\\voxtext\\out\\cf509d86b6ed4535bd1c9c22dbb9ff4a.mp3",
-    "created_at_iso": "2026-04-28T17:50:26.277010+00:00"
-  },
-  {
-    "job_id": "6032ba048dc34f6784d074b4ec575fb1",
-    "text": "инопришеленец",
-    "interpretation": {
-      "clean_text": "инопришеленец",
-      "language": "ro",
-      "segments": [
-        "инопришеленец"
-      ],
-      "stats": {
-        "chars": 13,
-        "words": 1,
-        "segments": 1
-      }
-    },
-    "settings": {
-      "voice_id": null,
-      "rate": 175,
-      "volume": 1.0,
-      "lang": "ru"
-    },
-    "output_path": "D:\\voxtext\\out\\6032ba048dc34f6784d074b4ec575fb1.mp3",
-    "created_at_iso": "2026-04-28T17:50:46.694038+00:00"
-  },
-  {
-    "job_id": "02d85ca377e5425ea8176ee35a1f10a0",
-    "text": "текст появится здесь острота заблокировались видео",
-    "interpretation": {
-      "clean_text": "текст появится здесь острота заблокировались видео",
-      "language": "ro",
-      "segments": [
-        "текст появится здесь острота заблокировались видео"
-      ],
-      "stats": {
-        "chars": 50,
+        "chars": 48,
         "words": 6,
         "segments": 1
       }
     },
     "settings": {
       "voice_id": null,
-      "rate": 175,
+      "rate": 190,
+      "volume": 1.0,
+      "lang": "ro"
+    },
+    "output_path": "D:\\voxtext\\out\\61f3f16d06154835b1a26ccbae238be4.mp3",
+    "created_at_iso": "2026-04-30T03:53:58.243293+00:00"
+  },
+  {
+    "job_id": "b2c74c7cdee847a192e7f8165da21166",
+    "text": "Utilizez edge tts pentru interpretarea textului.",
+    "interpretation": {
+      "clean_text": "Utilizez edge tts pentru interpretarea textului.",
+      "language": "ro",
+      "segments": [
+        "Utilizez edge tts pentru interpretarea textului."
+      ],
+      "stats": {
+        "chars": 48,
+        "words": 6,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": null,
+      "rate": 190,
+      "volume": 1.0,
+      "lang": "ro"
+    },
+    "output_path": null,
+    "created_at_iso": "2026-04-30T03:55:39.338672+00:00"
+  },
+  {
+    "job_id": "8bbde06e477d4d819f2e0e1357222890",
+    "text": "Utilizez edge tts pentru interpretarea textului.",
+    "interpretation": {
+      "clean_text": "Utilizez edge tts pentru interpretarea textului.",
+      "language": "ro",
+      "segments": [
+        "Utilizez edge tts pentru interpretarea textului."
+      ],
+      "stats": {
+        "chars": 48,
+        "words": 6,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": null,
+      "rate": 190,
+      "volume": 1.0,
+      "lang": "ro"
+    },
+    "output_path": null,
+    "created_at_iso": "2026-04-30T03:55:45.105596+00:00"
+  },
+  {
+    "job_id": "1cf0c5b20433431397c1b8673262b0ff",
+    "text": "Buna ziua, mă numesc Anastasia",
+    "interpretation": {
+      "clean_text": "Buna ziua, mă numesc Anastasia",
+      "language": "ro",
+      "segments": [
+        "Buna ziua, mă numesc Anastasia"
+      ],
+      "stats": {
+        "chars": 30,
+        "words": 5,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": null,
+      "rate": 190,
+      "volume": 1.0,
+      "lang": "ro"
+    },
+    "output_path": "D:\\voxtext\\out\\1cf0c5b20433431397c1b8673262b0ff.mp3",
+    "created_at_iso": "2026-04-30T06:48:36.255050+00:00"
+  },
+  {
+    "job_id": "b31e54238aa04e858646e429c4777544",
+    "text": "Buna ziua, mă numesc Anastasia",
+    "interpretation": {
+      "clean_text": "Buna ziua, mă numesc Anastasia",
+      "language": "ro",
+      "segments": [
+        "Buna ziua, mă numesc Anastasia"
+      ],
+      "stats": {
+        "chars": 30,
+        "words": 5,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": "ro-RO-EmilNeural",
+      "rate": 190,
+      "volume": 1.0,
+      "lang": "ro"
+    },
+    "output_path": "D:\\voxtext\\out\\b31e54238aa04e858646e429c4777544.mp3",
+    "created_at_iso": "2026-04-30T06:48:58.160939+00:00"
+  },
+  {
+    "job_id": "317df8b7bad44fa8ae4dd333cffe5fd6",
+    "text": "Buna ziua, mă numesc Anastasia",
+    "interpretation": {
+      "clean_text": "Buna ziua, mă numesc Anastasia",
+      "language": "ro",
+      "segments": [
+        "Buna ziua, mă numesc Anastasia"
+      ],
+      "stats": {
+        "chars": 30,
+        "words": 5,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": "ro-RO-EmilNeural",
+      "rate": 190,
+      "volume": 1.0,
+      "lang": "ro"
+    },
+    "output_path": "D:\\voxtext\\out\\317df8b7bad44fa8ae4dd333cffe5fd6.mp3",
+    "created_at_iso": "2026-04-30T06:50:04.025462+00:00"
+  },
+  {
+    "job_id": "cfa98e20cbad4a25a009ecf8450f1b89",
+    "text": "Buna ziua, mă numesc Anastasia",
+    "interpretation": {
+      "clean_text": "Buna ziua, mă numesc Anastasia",
+      "language": "ro",
+      "segments": [
+        "Buna ziua, mă numesc Anastasia"
+      ],
+      "stats": {
+        "chars": 30,
+        "words": 5,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": "ro-RO-EmilNeural",
+      "rate": 190,
+      "volume": 1.0,
+      "lang": "ro"
+    },
+    "output_path": "D:\\voxtext\\out\\cfa98e20cbad4a25a009ecf8450f1b89.mp3",
+    "created_at_iso": "2026-04-30T06:50:15.067718+00:00"
+  },
+  {
+    "job_id": "cc3108e3d9764b58baa1fc554a308541",
+    "text": "у шамана три руки\nи крыло из за плеча",
+    "interpretation": {
+      "clean_text": "у шамана три руки и крыло из за плеча",
+      "language": "ro",
+      "segments": [
+        "у шамана три руки и крыло из за плеча"
+      ],
+      "stats": {
+        "chars": 37,
+        "words": 9,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": null,
+      "rate": 190,
       "volume": 1.0,
       "lang": "ru"
     },
-    "output_path": "D:\\voxtext\\out\\02d85ca377e5425ea8176ee35a1f10a0.mp3",
-    "created_at_iso": "2026-04-28T17:51:25.673683+00:00"
+    "output_path": "D:\\voxtext\\out\\cc3108e3d9764b58baa1fc554a308541.mp3",
+    "created_at_iso": "2026-05-01T13:33:53.026272+00:00"
+  },
+  {
+    "job_id": "32359ec70e2743419b105683d192c8ce",
+    "text": "у шамана три руки\nи крыло из за плеча",
+    "interpretation": {
+      "clean_text": "у шамана три руки и крыло из за плеча",
+      "language": "ro",
+      "segments": [
+        "у шамана три руки и крыло из за плеча"
+      ],
+      "stats": {
+        "chars": 37,
+        "words": 9,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": null,
+      "rate": 190,
+      "volume": 1.0,
+      "lang": "ru"
+    },
+    "output_path": "D:\\voxtext\\out\\32359ec70e2743419b105683d192c8ce.mp3",
+    "created_at_iso": "2026-05-01T13:35:26.699393+00:00"
+  },
+  {
+    "job_id": "7b482684e04946f5a67533946968c120",
+    "text": "Говорите а что он не говорит Я думала что это я",
+    "interpretation": {
+      "clean_text": "Говорите а что он не говорит Я думала что это я",
+      "language": "ro",
+      "segments": [
+        "Говорите а что он не говорит Я думала что это я"
+      ],
+      "stats": {
+        "chars": 47,
+        "words": 11,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": "ru-RU-DmitryNeural",
+      "rate": 190,
+      "volume": 1.0,
+      "lang": "ru"
+    },
+    "output_path": null,
+    "created_at_iso": "2026-05-01T13:36:56.707387+00:00"
+  },
+  {
+    "job_id": "81f19b772576430ebe0726ce2bcfed7b",
+    "text": "Говорите а что он не говорит Я думала что это я",
+    "interpretation": {
+      "clean_text": "Говорите а что он не говорит Я думала что это я",
+      "language": "ro",
+      "segments": [
+        "Говорите а что он не говорит Я думала что это я"
+      ],
+      "stats": {
+        "chars": 47,
+        "words": 11,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": "ru-RU-DmitryNeural",
+      "rate": 190,
+      "volume": 1.0,
+      "lang": "ru"
+    },
+    "output_path": null,
+    "created_at_iso": "2026-05-01T13:37:00.238632+00:00"
+  },
+  {
+    "job_id": "e50fee4ca8f241228c03c38c2de25720",
+    "text": "Salut ecaterina",
+    "interpretation": {
+      "clean_text": "Salut ecaterina",
+      "language": "ro",
+      "segments": [
+        "Salut ecaterina"
+      ],
+      "stats": {
+        "chars": 15,
+        "words": 2,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": null,
+      "rate": 190,
+      "volume": 1.0,
+      "lang": "ro"
+    },
+    "output_path": null,
+    "created_at_iso": "2026-05-01T13:49:44.363210+00:00"
+  },
+  {
+    "job_id": "69d736d7dfc54ad6ba323a9a05784a11",
+    "text": "Salut ecaterina",
+    "interpretation": {
+      "clean_text": "Salut ecaterina",
+      "language": "ro",
+      "segments": [
+        "Salut ecaterina"
+      ],
+      "stats": {
+        "chars": 15,
+        "words": 2,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": null,
+      "rate": 190,
+      "volume": 1.0,
+      "lang": "ro"
+    },
+    "output_path": "D:\\voxtext\\out\\69d736d7dfc54ad6ba323a9a05784a11.mp3",
+    "created_at_iso": "2026-05-01T13:50:11.447138+00:00"
+  },
+  {
+    "job_id": "2f3fe137ed5740069886efefd2827014",
+    "text": "Salut ecaterina",
+    "interpretation": {
+      "clean_text": "Salut ecaterina",
+      "language": "ro",
+      "segments": [
+        "Salut ecaterina"
+      ],
+      "stats": {
+        "chars": 15,
+        "words": 2,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": "ro-RO-EmilNeural",
+      "rate": 190,
+      "volume": 1.0,
+      "lang": "ro"
+    },
+    "output_path": "D:\\voxtext\\out\\2f3fe137ed5740069886efefd2827014.mp3",
+    "created_at_iso": "2026-05-01T13:50:28.544137+00:00"
+  },
+  {
+    "job_id": "170b771f744543a991d07d306e577384",
+    "text": "Enter text here",
+    "interpretation": {
+      "clean_text": "Enter text here",
+      "language": "ro",
+      "segments": [
+        "Enter text here"
+      ],
+      "stats": {
+        "chars": 15,
+        "words": 3,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": "en-US-GuyNeural",
+      "rate": 190,
+      "volume": 1.0,
+      "lang": "en"
+    },
+    "output_path": "D:\\voxtext\\out\\170b771f744543a991d07d306e577384.mp3",
+    "created_at_iso": "2026-05-01T13:51:20.148018+00:00"
+  },
+  {
+    "job_id": "34434e31590b4d95adbac73b7cf227ec",
+    "text": "Enter text here",
+    "interpretation": {
+      "clean_text": "Enter text here",
+      "language": "ro",
+      "segments": [
+        "Enter text here"
+      ],
+      "stats": {
+        "chars": 15,
+        "words": 3,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": "en-US-JennyNeural",
+      "rate": 190,
+      "volume": 1.0,
+      "lang": "en"
+    },
+    "output_path": "D:\\voxtext\\out\\34434e31590b4d95adbac73b7cf227ec.mp3",
+    "created_at_iso": "2026-05-01T13:51:39.745389+00:00"
+  },
+  {
+    "job_id": "bd63afdffad04c1491ba6fee4e9404f1",
+    "text": "Enter text here",
+    "interpretation": {
+      "clean_text": "Enter text here",
+      "language": "ro",
+      "segments": [
+        "Enter text here"
+      ],
+      "stats": {
+        "chars": 15,
+        "words": 3,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": "en-US-AriaNeural",
+      "rate": 190,
+      "volume": 1.0,
+      "lang": "en"
+    },
+    "output_path": "D:\\voxtext\\out\\bd63afdffad04c1491ba6fee4e9404f1.mp3",
+    "created_at_iso": "2026-05-01T13:51:57.096108+00:00"
   }
 ]

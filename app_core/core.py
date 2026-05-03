@@ -18,10 +18,12 @@ class AppCore:
         tts_engine: TTSEngine,
         stt_engine: STTEngine | None = None,
         fallback_tts: TTSEngine | None = None,
+        fallback_stt: STTEngine | None = None,
     ) -> None:
         self.tts = tts_engine
         self.stt = stt_engine
         self._fallback_tts = fallback_tts
+        self._fallback_stt = fallback_stt
 
     def interpret_text(self, text: str):
         return interpret(text)
@@ -29,7 +31,30 @@ class AppCore:
     def listen_text(self, lang: str = "ro-RO") -> str:
         if not self.stt:
             raise RuntimeError("STT engine not set.")
-        return self.stt.listen_once(lang=lang)
+        try:
+            return self.stt.listen_once(lang=lang)
+        except Exception as primary_err:
+            if self._fallback_stt is None:
+                raise
+            _logger.warning(
+                "Primary STT (%s) failed, switching to fallback (%s): %s",
+                self.stt.name(), self._fallback_stt.name(), primary_err,
+            )
+            return self._fallback_stt.listen_once(lang=lang)
+
+    def start_stt(self, on_result, on_error, lang: str = "ro-RO") -> None:
+        engine = self.stt
+        if not engine:
+            on_error("No STT engine configured")
+            return
+        if hasattr(engine, "start_listening"):
+            engine.start_listening(on_result, on_error, lang)
+        else:
+            on_error("Engine does not support continuous listening")
+
+    def stop_stt(self) -> None:
+        if self.stt and hasattr(self.stt, "stop_listening"):
+            self.stt.stop_listening()
 
     def speak_text(self, text: str, settings: TTSSettings) -> TTSJob:
         interpretation = interpret(text)

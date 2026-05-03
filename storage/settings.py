@@ -26,6 +26,7 @@ class AppSettings:
     max_history: int = DEFAULT_MAX_HISTORY
     theme: str = "dark"
     font_scale: float = 1.0
+    whisper_model: str = "small"
 
     def tts_settings(self) -> TTSSettings:
         return TTSSettings(
@@ -58,6 +59,10 @@ def load_app_settings() -> AppSettings:
                 "stt_pause_threshold": _DEFAULTS.stt_pause_threshold,
                 "max_history": _DEFAULTS.max_history,
             }
+        whisper_model = data.get("whisper_model", _DEFAULTS.whisper_model)
+        from stt.whisper_engine import VALID_MODELS
+        if whisper_model not in VALID_MODELS:
+            whisper_model = _DEFAULTS.whisper_model
         return AppSettings(
             lang=data.get("lang", _DEFAULTS.lang),
             voice_id=data.get("voice_id", _DEFAULTS.voice_id),
@@ -67,6 +72,7 @@ def load_app_settings() -> AppSettings:
             max_history=int(data.get("max_history", _DEFAULTS.max_history)),
             theme=data.get("theme", _DEFAULTS.theme),
             font_scale=float(data.get("font_scale", _DEFAULTS.font_scale)),
+            whisper_model=whisper_model,
         )
     except Exception:
         return AppSettings()

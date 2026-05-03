@@ -36,7 +36,10 @@ class MainScreen(Screen):
         self.btn_settings = RoundedButton(font_size='20sp')
         self.btn_settings.bind(on_release=lambda i: setattr(self.manager, 'current', 'settings'))
 
-        for btn in (self.btn_stt, self.btn_tts, self.btn_file, self.btn_history, self.btn_settings):
+        self.btn_benchmark = RoundedButton(font_size='20sp')
+        self.btn_benchmark.bind(on_release=lambda i: setattr(self.manager, 'current', 'benchmark'))
+
+        for btn in (self.btn_stt, self.btn_tts, self.btn_file, self.btn_history, self.btn_settings, self.btn_benchmark):
             layout.add_widget(btn)
 
         self.add_widget(layout)
@@ -48,6 +51,7 @@ class MainScreen(Screen):
         self.btn_file.text = t('main_file')
         self.btn_history.text = t('main_history')
         self.btn_settings.text = t('main_settings')
+        self.btn_benchmark.text = t('main_benchmark')
 
     def on_enter(self, *args):
         load_lang()

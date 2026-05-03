@@ -110,7 +110,6 @@ def restart_app() -> None:
 class RoundedButton(Button):
     btn_color = ListProperty(None)
     corner_radius = NumericProperty(12)
-    _scale = NumericProperty(1.0)
     _press = NumericProperty(0.0)
 
     def __init__(self, **kwargs):
@@ -131,32 +130,28 @@ class RoundedButton(Button):
             pos=self._redraw,
             size=self._redraw,
             btn_color=self._redraw,
-            _scale=self._redraw,
             _press=self._redraw,
         )
         self.bind(size=lambda inst, val: setattr(inst, "text_size", val))
         self._redraw()
 
     def on_state(self, instance, value: str) -> None:
-        Animation.cancel_all(self, "_scale", "_press")
+        Animation.cancel_all(self, "_press")
         if value == "down":
-            Animation(_scale=0.95, _press=1.0, duration=0.09, t="out_cubic").start(self)
+            Animation(_press=1.0, duration=0.09, t="out_cubic").start(self)
         else:
-            Animation(_scale=1.0, _press=0.0, duration=0.22, t="out_expo").start(self)
+            Animation(_press=0.0, duration=0.22, t="out_expo").start(self)
 
     def _redraw(self, *args) -> None:
         self.canvas.before.clear()
         base = list(self.btn_color) if self.btn_color else list(_t["btn_normal"])
-        s = self._scale
         p = self._press
 
         factor = 1.0 - p * 0.20
         c = [base[0] * factor, base[1] * factor, base[2] * factor, base[3]]
 
-        w = self.width * s
-        h = self.height * s
-        x = self.center_x - w / 2
-        y = self.center_y - h / 2
+        x, y = self.x, self.y
+        w, h = self.width, self.height
         r = dp(self.corner_radius)
 
         with self.canvas.before:

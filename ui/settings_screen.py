@@ -14,6 +14,7 @@ from ui.i18n import load_lang, t
 
 _LANG_OPTIONS = [("RO", "ro"), ("RU", "ru"), ("EN", "en")]
 _THEME_KEYS = [("settings_theme_dark", "dark"), ("settings_theme_light", "light")]
+_WHISPER_MODELS = ("tiny", "base", "small", "medium")
 
 
 class SettingsScreen(Screen):
@@ -89,6 +90,27 @@ class SettingsScreen(Screen):
             value=self._s.stt_pause_threshold, step=0.1, on_value=self._on_pause,
         )
 
+        self.whisper_label = Label(
+            font_size='14sp',
+            size_hint_y=None,
+            height=sp(26),
+            halign='left',
+        )
+        content.add_widget(self.whisper_label)
+        whisper_row = BoxLayout(
+            orientation='horizontal',
+            size_hint_y=None,
+            height=sp(52),
+            spacing=dp(8),
+        )
+        self._whisper_btns: dict[str, RoundedButton] = {}
+        for m in _WHISPER_MODELS:
+            btn = RoundedButton(text=m, font_size='14sp')
+            btn.bind(on_release=lambda inst, model=m: self._set_whisper_model(model))
+            self._whisper_btns[m] = btn
+            whisper_row.add_widget(btn)
+        content.add_widget(whisper_row)
+
         self.sec_history = self._section_label()
         content.add_widget(self.sec_history)
 
@@ -130,6 +152,7 @@ class SettingsScreen(Screen):
         self._refresh_lang_buttons()
         self._refresh_theme_buttons()
         self._refresh_voice_spinner()
+        self._refresh_whisper_buttons()
 
     def _section_label(self) -> Label:
         lbl = Label(
@@ -160,6 +183,7 @@ class SettingsScreen(Screen):
         self.vol_label.text = t('settings_volume', n=f'{self._s.tts_volume:.1f}')
         self.sec_stt.text = f'— {t("settings_stt_section")} —'
         self.pause_label.text = t('settings_pause', n=f'{self._s.stt_pause_threshold:.1f}')
+        self.whisper_label.text = t('settings_whisper_model', model=self._s.whisper_model)
         self.sec_history.text = f'— {t("settings_history_section")} —'
         self.hist_label.text = t('settings_max_history', n=self._s.max_history)
         self.sec_appearance.text = f'— {t("settings_appearance")} —'
@@ -231,6 +255,19 @@ class SettingsScreen(Screen):
         self.pause_label.text = t('settings_pause', n=f'{round(value, 1):.1f}')
         save_app_settings(self._s)
 
+    def _set_whisper_model(self, model: str):
+        self._s.whisper_model = model
+        self.whisper_label.text = t('settings_whisper_model', model=model)
+        self._refresh_whisper_buttons()
+        save_app_settings(self._s)
+
+    def _refresh_whisper_buttons(self):
+        th = get()
+        for model, btn in self._whisper_btns.items():
+            btn.btn_color = list(
+                th['btn_accent'] if model == self._s.whisper_model else th['btn_normal']
+            )
+
     def _on_max_history(self, slider, value):
         if self._refreshing:
             return
@@ -258,6 +295,7 @@ class SettingsScreen(Screen):
         self._refresh_lang_buttons()
         self._refresh_theme_buttons()
         self._refresh_voice_spinner()
+        self._refresh_whisper_buttons()
         self.rate_slider.value = self._s.tts_rate
         self.vol_slider.value = self._s.tts_volume
         self.pause_slider.value = self._s.stt_pause_threshold
