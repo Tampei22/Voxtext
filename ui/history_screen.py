@@ -171,12 +171,12 @@ class HistoryScreen(Screen):
         info_col.add_widget(lbl_date)
         row.add_widget(info_col)
 
-        play_btn = RoundedButton(text='▶', size_hint_x=None, width=dp(50), font_size='14sp')
+        play_btn = RoundedButton(text='Play', size_hint_x=None, width=dp(50), font_size='14sp')
         play_btn.bind(on_release=lambda inst, tx=raw_text: self._play_tts_job(tx))
         row.add_widget(play_btn)
 
         job_id = job.get('job_id', '')
-        del_btn = RoundedButton(text='✕', size_hint_x=None, width=dp(50), font_size='14sp')
+        del_btn = RoundedButton(text='Del', size_hint_x=None, width=dp(50), font_size='14sp')
         del_btn.bind(on_release=lambda inst, jid=job_id: self._delete_tts_job(jid))
         row.add_widget(del_btn)
 

@@ -9,214 +9,258 @@ from kivy.uix.spinner import Spinner
 
 from storage.settings import load_app_settings, save_app_settings
 from tts.edge_tts_engine import EdgeTTSEngine
-from ui.theme import RoundedButton, get, current_name, restart_app
+from ui.theme import (
+    RoundedButton, COLOR_SCHEMES, apply_color_scheme,
+    get, current_scheme, restart_app,
+)
 from ui.i18n import load_lang, t
 
 _LANG_OPTIONS = [("RO", "ro"), ("RU", "ru"), ("EN", "en")]
-_THEME_KEYS = [("settings_theme_dark", "dark"), ("settings_theme_light", "light")]
+_THEME_KEYS   = [("DARK", "dark"), ("LIGHT", "light")]
 _WHISPER_MODELS = ("tiny", "base", "small", "medium")
+_SCHEME_NAMES   = {
+    "blue": "Albastru", "green": "Verde",
+    "orange": "Portocaliu", "purple": "Violet", "red": "Rosu",
+}
+
+
+class _SectionHeader(Label):
+    def __init__(self, text, **kwargs):
+        th = get()
+        super().__init__(
+            text=text,
+            font_size="12sp",
+            size_hint_y=None,
+            height=dp(28),
+            color=th["btn_accent"],
+            bold=True,
+            halign="left",
+            valign="middle",
+        )
+        self.bind(size=self.setter("text_size"))
 
 
 class SettingsScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.name = 'settings'
+        self.name = "settings"
         self._s = load_app_settings()
         self._refreshing = False
-        self._lang_btns: dict[str, RoundedButton] = {}
-        self._theme_btns: dict[str, RoundedButton] = {}
+        self._lang_btns:    dict[str, RoundedButton] = {}
+        self._theme_btns:   dict[str, RoundedButton] = {}
+        self._whisper_btns: dict[str, RoundedButton] = {}
+        self._scheme_btns:  dict[str, RoundedButton] = {}
+        self._build_ui()
 
-        outer = BoxLayout(orientation='vertical', padding=dp(16), spacing=dp(10))
+    # ── Build ─────────────────────────────────────────────────────────────
 
-        self.back_btn = RoundedButton(size_hint_y=None, height=50)
-        self.back_btn.bind(on_release=self.go_back)
-        outer.add_widget(self.back_btn)
+    def _build_ui(self):
+        outer = BoxLayout(orientation="vertical", padding=dp(12), spacing=dp(8))
 
-        self.title_label = Label(
-            font_size='22sp',
-            size_hint_y=None,
-            height=sp(44),
+        # Top bar
+        top = BoxLayout(orientation="horizontal",
+                        size_hint_y=None, height=dp(48), spacing=dp(8))
+        self.back_btn = RoundedButton(
+            size_hint=(None, None), size=(dp(90), dp(44)),
+            font_size="14sp",
         )
-        outer.add_widget(self.title_label)
+        self.back_btn.bind(on_release=self.go_back)
+        self.title_lbl = Label(
+            font_size="22sp", bold=True,
+            halign="left", valign="middle",
+        )
+        self.title_lbl.bind(size=self.title_lbl.setter("text_size"))
+        top.add_widget(self.back_btn)
+        top.add_widget(self.title_lbl)
+        outer.add_widget(top)
 
-        scroll = ScrollView()
-        content = GridLayout(cols=1, spacing=dp(10), size_hint_y=None, padding=(0, dp(4)))
-        content.bind(minimum_height=content.setter('height'))
+        # Scroll
+        scroll = ScrollView(do_scroll_x=False)
+        grid = GridLayout(cols=1, spacing=dp(10),
+                          size_hint_y=None, padding=(0, dp(4)))
+        grid.bind(minimum_height=grid.setter("height"))
 
-        self.sec_lang = self._section_label()
-        content.add_widget(self.sec_lang)
+        # ── 1. Language & Voice ───────────────────────────────────────────
+        grid.add_widget(_SectionHeader("LIMBA SI VOCE"))
 
-        lang_row = BoxLayout(orientation='horizontal', size_hint_y=None, height=sp(52), spacing=dp(8))
+        lang_row = BoxLayout(orientation="horizontal",
+                             size_hint_y=None, height=dp(44), spacing=dp(8))
         for display, code in _LANG_OPTIONS:
-            btn = RoundedButton(text=display, font_size='17sp')
-            btn.bind(on_release=lambda inst, c=code: self._set_lang(c))
+            btn = RoundedButton(text=display, font_size="16sp",
+                                size_hint_y=None, height=dp(44))
+            btn.bind(on_release=lambda _, c=code: self._set_lang(c))
             self._lang_btns[code] = btn
             lang_row.add_widget(btn)
-        content.add_widget(lang_row)
+        grid.add_widget(lang_row)
 
-        voice_col = BoxLayout(orientation='vertical', size_hint_y=None, height=sp(84), spacing=dp(4))
-        self.voice_label = Label(
-            font_size='14sp',
-            size_hint_y=None,
-            height=sp(26),
-            halign='left',
-        )
         self.voice_spinner = Spinner(
-            text='', values=[],
-            size_hint_y=None, height=sp(46), font_size='14sp',
+            text="", values=[],
+            size_hint_y=None, height=dp(44), font_size="14sp",
         )
         self.voice_spinner.bind(text=self._on_voice_selected)
-        voice_col.add_widget(self.voice_label)
-        voice_col.add_widget(self.voice_spinner)
-        content.add_widget(voice_col)
+        grid.add_widget(self.voice_spinner)
 
-        self.sec_tts = self._section_label()
-        content.add_widget(self.sec_tts)
+        # ── 2. TTS ───────────────────────────────────────────────────────
+        grid.add_widget(_SectionHeader("SINTEZA VOCALA (TTS)"))
+        self.rate_lbl, self.rate_slider = self._slider_row(
+            grid, 100, 300, self._s.tts_rate, 5, self._on_rate)
+        self.vol_lbl, self.vol_slider = self._slider_row(
+            grid, 0.1, 1.0, self._s.tts_volume, 0.1, self._on_volume)
 
-        self.rate_label, self.rate_slider = self._slider_row(
-            content, min_val=100, max_val=300,
-            value=self._s.tts_rate, step=5, on_value=self._on_rate,
-        )
-        self.vol_label, self.vol_slider = self._slider_row(
-            content, min_val=0.1, max_val=1.0,
-            value=self._s.tts_volume, step=0.1, on_value=self._on_volume,
-        )
+        # ── 3. STT ───────────────────────────────────────────────────────
+        grid.add_widget(_SectionHeader("RECUNOASTERE VOCALA (STT)"))
+        self.pause_lbl, self.pause_slider = self._slider_row(
+            grid, 0.3, 3.0, self._s.stt_pause_threshold, 0.1, self._on_pause)
 
-        self.sec_stt = self._section_label()
-        content.add_widget(self.sec_stt)
+        self.whisper_lbl = Label(
+            font_size="13sp", size_hint_y=None, height=dp(22),
+            halign="left", valign="middle", color=get()["text"],
+        )
+        self.whisper_lbl.bind(size=self.whisper_lbl.setter("text_size"))
+        grid.add_widget(self.whisper_lbl)
 
-        self.pause_label, self.pause_slider = self._slider_row(
-            content, min_val=0.3, max_val=3.0,
-            value=self._s.stt_pause_threshold, step=0.1, on_value=self._on_pause,
-        )
-
-        self.whisper_label = Label(
-            font_size='14sp',
-            size_hint_y=None,
-            height=sp(26),
-            halign='left',
-        )
-        content.add_widget(self.whisper_label)
-        whisper_row = BoxLayout(
-            orientation='horizontal',
-            size_hint_y=None,
-            height=sp(52),
-            spacing=dp(8),
-        )
-        self._whisper_btns: dict[str, RoundedButton] = {}
+        whisper_row = BoxLayout(orientation="horizontal",
+                                size_hint_y=None, height=dp(44), spacing=dp(6))
         for m in _WHISPER_MODELS:
-            btn = RoundedButton(text=m, font_size='14sp')
-            btn.bind(on_release=lambda inst, model=m: self._set_whisper_model(model))
+            btn = RoundedButton(text=m, font_size="13sp",
+                                size_hint_y=None, height=dp(44))
+            btn.bind(on_release=lambda _, model=m: self._set_whisper_model(model))
             self._whisper_btns[m] = btn
             whisper_row.add_widget(btn)
-        content.add_widget(whisper_row)
+        grid.add_widget(whisper_row)
 
-        self.sec_history = self._section_label()
-        content.add_widget(self.sec_history)
+        # ── 4. History ────────────────────────────────────────────────────
+        grid.add_widget(_SectionHeader("ISTORIC"))
+        self.hist_lbl, self.hist_slider = self._slider_row(
+            grid, 10, 200, self._s.max_history, 10, self._on_max_history)
 
-        self.hist_label, self.hist_slider = self._slider_row(
-            content, min_val=10, max_val=200,
-            value=self._s.max_history, step=10, on_value=self._on_max_history,
-        )
+        # ── 5. Appearance ─────────────────────────────────────────────────
+        grid.add_widget(_SectionHeader("ASPECT"))
 
-        self.sec_appearance = self._section_label()
-        content.add_widget(self.sec_appearance)
-
-        theme_row = BoxLayout(orientation='horizontal', size_hint_y=None, height=sp(52), spacing=dp(8))
-        for key, tname in _THEME_KEYS:
-            btn = RoundedButton(font_size='16sp')
-            btn.bind(on_release=lambda inst, n=tname: self._set_theme(n))
+        theme_row = BoxLayout(orientation="horizontal",
+                              size_hint_y=None, height=dp(44), spacing=dp(8))
+        for label, tname in _THEME_KEYS:
+            btn = RoundedButton(text=label, font_size="15sp",
+                                size_hint_y=None, height=dp(44))
+            btn.bind(on_release=lambda _, n=tname: self._set_theme(n))
             self._theme_btns[tname] = btn
             theme_row.add_widget(btn)
-        content.add_widget(theme_row)
+        grid.add_widget(theme_row)
 
-        pct = int(self._s.font_scale * 100)
-        self.scale_label, self.scale_slider = self._slider_row(
-            content, min_val=85, max_val=150,
-            value=pct, step=5, on_value=self._on_font_scale,
+        scheme_lbl = Label(
+            text=t("settings_color_scheme"),
+            font_size="13sp", color=get()["text"],
+            size_hint_y=None, height=dp(24),
+            halign="left", valign="middle",
         )
+        scheme_lbl.bind(size=scheme_lbl.setter("text_size"))
+        grid.add_widget(scheme_lbl)
+
+        scheme_row = BoxLayout(orientation="horizontal",
+                               size_hint_y=None, height=dp(52), spacing=dp(6))
+        for key, color in COLOR_SCHEMES.items():
+            col_box = BoxLayout(orientation="vertical",
+                                spacing=dp(2))
+            dot_btn = RoundedButton(
+                text="",
+                size_hint_y=None, height=dp(34),
+                btn_color=list(color),
+                corner_radius=8,
+            )
+            dot_btn.bind(on_release=lambda _, k=key: self._set_scheme(k))
+            self._scheme_btns[key] = dot_btn
+            name_lbl = Label(
+                text=_SCHEME_NAMES.get(key, key),
+                font_size="9sp", color=get()["text"],
+                size_hint_y=None, height=dp(14),
+                halign="center",
+            )
+            name_lbl.bind(size=name_lbl.setter("text_size"))
+            col_box.add_widget(dot_btn)
+            col_box.add_widget(name_lbl)
+            scheme_row.add_widget(col_box)
+        grid.add_widget(scheme_row)
+
+        grid.add_widget(_SectionHeader("SCALA TEXT"))
+        pct = int(self._s.font_scale * 100)
+        self.scale_lbl, self.scale_slider = self._slider_row(
+            grid, 85, 150, pct, 5, self._on_font_scale)
 
         self.restart_btn = RoundedButton(
-            font_size='14sp',
-            size_hint_y=None, height=sp(54),
-            btn_color=list(get()['btn_accent']),
+            size_hint_y=None, height=dp(48),
+            font_size="13sp",
+            btn_color=list(get()["btn_accent"]),
         )
-        self.restart_btn.bind(on_release=lambda inst: restart_app())
-        content.add_widget(self.restart_btn)
+        self.restart_btn.bind(on_release=lambda _: restart_app())
+        grid.add_widget(self.restart_btn)
 
-        scroll.add_widget(content)
+        grid.add_widget(BoxLayout(size_hint_y=None, height=dp(20)))
+
+        scroll.add_widget(grid)
         outer.add_widget(scroll)
         self.add_widget(outer)
 
         self._update_texts()
         self._refresh_lang_buttons()
         self._refresh_theme_buttons()
-        self._refresh_voice_spinner()
         self._refresh_whisper_buttons()
+        self._refresh_scheme_buttons()
+        self._refresh_voice_spinner()
 
-    def _section_label(self) -> Label:
-        lbl = Label(
-            font_size='13sp',
-            color=get()['section'],
-            size_hint_y=None,
-            height=sp(32),
-        )
-        return lbl
+    # ── Slider helper ─────────────────────────────────────────────────────
 
     def _slider_row(self, parent, min_val, max_val, value, step, on_value):
-        col = BoxLayout(orientation='vertical', size_hint_y=None, height=sp(76), spacing=dp(2))
-        lbl = Label(text='', font_size='14sp', size_hint_y=None, height=sp(28))
-        sldr = Slider(min=min_val, max=max_val, value=value, step=step)
+        box = BoxLayout(orientation="vertical",
+                        size_hint_y=None, height=dp(64), spacing=dp(0))
+        lbl = Label(
+            text="", font_size="13sp",
+            size_hint_y=None, height=dp(22),
+            halign="left", valign="middle", color=get()["text"],
+        )
+        lbl.bind(size=lbl.setter("text_size"))
+        sldr = Slider(
+            min=min_val, max=max_val, value=value, step=step,
+            size_hint_y=None, height=dp(40),
+            cursor_size=(dp(22), dp(22)),
+        )
         sldr.bind(value=on_value)
-        col.add_widget(lbl)
-        col.add_widget(sldr)
-        parent.add_widget(col)
+        box.add_widget(lbl)
+        box.add_widget(sldr)
+        parent.add_widget(box)
         return lbl, sldr
 
-    def _update_texts(self):
-        self.back_btn.text = t('back')
-        self.title_label.text = t('settings_title')
-        self.sec_lang.text = f'— {t("settings_lang_voice")} —'
-        self.voice_label.text = t('settings_voice')
-        self.sec_tts.text = f'— {t("settings_tts_section")} —'
-        self.rate_label.text = t('settings_rate', n=self._s.tts_rate)
-        self.vol_label.text = t('settings_volume', n=f'{self._s.tts_volume:.1f}')
-        self.sec_stt.text = f'— {t("settings_stt_section")} —'
-        self.pause_label.text = t('settings_pause', n=f'{self._s.stt_pause_threshold:.1f}')
-        self.whisper_label.text = t('settings_whisper_model', model=self._s.whisper_model)
-        self.sec_history.text = f'— {t("settings_history_section")} —'
-        self.hist_label.text = t('settings_max_history', n=self._s.max_history)
-        self.sec_appearance.text = f'— {t("settings_appearance")} —'
-        pct = int(self._s.font_scale * 100)
-        self.scale_label.text = t('settings_scale', n=pct)
-        self.restart_btn.text = t('settings_restart')
-        for key, tname in _THEME_KEYS:
-            self._theme_btns[tname].text = t(key)
+    # ── Event handlers ────────────────────────────────────────────────────
 
-    def _refresh_lang_buttons(self):
-        th = get()
-        for code, btn in self._lang_btns.items():
-            btn.btn_color = list(th['btn_accent'] if code == self._s.lang else th['btn_normal'])
+    def _on_rate(self, slider, value):
+        if self._refreshing: return
+        self._s.tts_rate = int(value)
+        self.rate_lbl.text = t("settings_rate", n=int(value))
+        save_app_settings(self._s)
 
-    def _refresh_theme_buttons(self):
-        th = get()
-        for tname, btn in self._theme_btns.items():
-            btn.btn_color = list(th['btn_accent'] if tname == self._s.theme else th['btn_normal'])
+    def _on_volume(self, slider, value):
+        if self._refreshing: return
+        self._s.tts_volume = round(float(value), 1)
+        self.vol_lbl.text = t("settings_volume", n=f"{self._s.tts_volume:.1f}")
+        save_app_settings(self._s)
 
-    def _refresh_voice_spinner(self):
-        self._refreshing = True
-        voices = EdgeTTSEngine.VOICES_BY_LANG.get(self._s.lang, [])
-        names = [name for name, _ in voices]
-        self.voice_spinner.values = names
+    def _on_pause(self, slider, value):
+        if self._refreshing: return
+        self._s.stt_pause_threshold = round(float(value), 1)
+        self.pause_lbl.text = t("settings_pause",
+                                n=f"{self._s.stt_pause_threshold:.1f}")
+        save_app_settings(self._s)
 
-        selected = ''
-        if self._s.voice_id:
-            for name, vid in voices:
-                if vid == self._s.voice_id:
-                    selected = name
-                    break
-        self.voice_spinner.text = selected or (names[0] if names else '')
-        self._refreshing = False
+    def _on_max_history(self, slider, value):
+        if self._refreshing: return
+        self._s.max_history = int(value)
+        self.hist_lbl.text = t("settings_max_history", n=self._s.max_history)
+        save_app_settings(self._s)
+
+    def _on_font_scale(self, slider, value):
+        if self._refreshing: return
+        self._s.font_scale = round(float(value) / 100.0, 2)
+        self.scale_lbl.text = t("settings_scale", n=int(value))
+        save_app_settings(self._s)
 
     def _set_lang(self, lang: str):
         self._s.lang = lang
@@ -226,53 +270,11 @@ class SettingsScreen(Screen):
         save_app_settings(self._s)
 
     def _on_voice_selected(self, spinner, name):
-        if self._refreshing:
-            return
+        if self._refreshing: return
         for vname, vid in EdgeTTSEngine.VOICES_BY_LANG.get(self._s.lang, []):
             if vname == name:
                 self._s.voice_id = vid
                 break
-        save_app_settings(self._s)
-
-    def _on_rate(self, slider, value):
-        if self._refreshing:
-            return
-        self._s.tts_rate = int(value)
-        self.rate_label.text = t('settings_rate', n=int(value))
-        save_app_settings(self._s)
-
-    def _on_volume(self, slider, value):
-        if self._refreshing:
-            return
-        self._s.tts_volume = round(value, 1)
-        self.vol_label.text = t('settings_volume', n=f'{round(value, 1):.1f}')
-        save_app_settings(self._s)
-
-    def _on_pause(self, slider, value):
-        if self._refreshing:
-            return
-        self._s.stt_pause_threshold = round(value, 1)
-        self.pause_label.text = t('settings_pause', n=f'{round(value, 1):.1f}')
-        save_app_settings(self._s)
-
-    def _set_whisper_model(self, model: str):
-        self._s.whisper_model = model
-        self.whisper_label.text = t('settings_whisper_model', model=model)
-        self._refresh_whisper_buttons()
-        save_app_settings(self._s)
-
-    def _refresh_whisper_buttons(self):
-        th = get()
-        for model, btn in self._whisper_btns.items():
-            btn.btn_color = list(
-                th['btn_accent'] if model == self._s.whisper_model else th['btn_normal']
-            )
-
-    def _on_max_history(self, slider, value):
-        if self._refreshing:
-            return
-        self._s.max_history = int(value)
-        self.hist_label.text = t('settings_max_history', n=int(value))
         save_app_settings(self._s)
 
     def _set_theme(self, theme_name: str):
@@ -280,12 +282,77 @@ class SettingsScreen(Screen):
         save_app_settings(self._s)
         self._refresh_theme_buttons()
 
-    def _on_font_scale(self, slider, value):
-        if self._refreshing:
-            return
-        self._s.font_scale = round(value / 100, 2)
-        self.scale_label.text = t('settings_scale', n=int(value))
+    def _set_whisper_model(self, model: str):
+        self._s.whisper_model = model
+        self.whisper_lbl.text = t("settings_whisper_model", model=model)
+        self._refresh_whisper_buttons()
         save_app_settings(self._s)
+
+    def _set_scheme(self, scheme: str):
+        self._s.color_scheme = scheme
+        save_app_settings(self._s)
+        apply_color_scheme(scheme)
+        self._refresh_scheme_buttons()
+        th = get()
+        self.restart_btn.btn_color = list(th["btn_accent"])
+
+    # ── Refresh helpers ───────────────────────────────────────────────────
+
+    def _refresh_lang_buttons(self):
+        th = get()
+        for code, btn in self._lang_btns.items():
+            btn.btn_color = list(
+                th["btn_accent"] if code == self._s.lang else th["btn_normal"]
+            )
+
+    def _refresh_theme_buttons(self):
+        th = get()
+        for tname, btn in self._theme_btns.items():
+            btn.btn_color = list(
+                th["btn_accent"] if tname == self._s.theme else th["btn_normal"]
+            )
+
+    def _refresh_whisper_buttons(self):
+        th = get()
+        for model, btn in self._whisper_btns.items():
+            btn.btn_color = list(
+                th["btn_accent"] if model == self._s.whisper_model
+                else th["btn_normal"]
+            )
+
+    def _refresh_scheme_buttons(self):
+        cur = getattr(self._s, "color_scheme", "blue")
+        for key, btn in self._scheme_btns.items():
+            btn.btn_color = list(COLOR_SCHEMES.get(key, [0.2, 0.47, 0.9, 1]))
+            # Show a dot on the selected scheme
+            btn.text = "●" if key == cur else ""
+
+    def _refresh_voice_spinner(self):
+        self._refreshing = True
+        voices = EdgeTTSEngine.VOICES_BY_LANG.get(self._s.lang, [])
+        names = [name for name, _ in voices]
+        self.voice_spinner.values = names
+        selected = ""
+        if self._s.voice_id:
+            for name, vid in voices:
+                if vid == self._s.voice_id:
+                    selected = name
+                    break
+        self.voice_spinner.text = selected or (names[0] if names else "")
+        self._refreshing = False
+
+    def _update_texts(self):
+        self.back_btn.text   = t("back")
+        self.title_lbl.text  = t("settings_title")
+        self.rate_lbl.text   = t("settings_rate",       n=self._s.tts_rate)
+        self.vol_lbl.text    = t("settings_volume",     n=f"{self._s.tts_volume:.1f}")
+        self.pause_lbl.text  = t("settings_pause",      n=f"{self._s.stt_pause_threshold:.1f}")
+        self.whisper_lbl.text = t("settings_whisper_model", model=self._s.whisper_model)
+        self.hist_lbl.text   = t("settings_max_history", n=self._s.max_history)
+        self.scale_lbl.text  = t("settings_scale",      n=int(self._s.font_scale * 100))
+        self.restart_btn.text = t("settings_restart")
+
+    # ── Screen lifecycle ──────────────────────────────────────────────────
 
     def on_enter(self, *args):
         load_lang()
@@ -294,15 +361,15 @@ class SettingsScreen(Screen):
         self._update_texts()
         self._refresh_lang_buttons()
         self._refresh_theme_buttons()
-        self._refresh_voice_spinner()
         self._refresh_whisper_buttons()
-        self.rate_slider.value = self._s.tts_rate
-        self.vol_slider.value = self._s.tts_volume
-        self.pause_slider.value = self._s.stt_pause_threshold
-        self.hist_slider.value = self._s.max_history
-        pct = int(self._s.font_scale * 100)
-        self.scale_slider.value = pct
+        self._refresh_scheme_buttons()
+        self._refresh_voice_spinner()
+        self.rate_slider.value   = self._s.tts_rate
+        self.vol_slider.value    = self._s.tts_volume
+        self.pause_slider.value  = self._s.stt_pause_threshold
+        self.hist_slider.value   = self._s.max_history
+        self.scale_slider.value  = int(self._s.font_scale * 100)
         self._refreshing = False
 
     def go_back(self, instance):
-        self.manager.current = 'main'
+        self.manager.current = "main"

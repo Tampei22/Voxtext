@@ -27,6 +27,7 @@ class AppSettings:
     theme: str = "dark"
     font_scale: float = 1.0
     whisper_model: str = "small"
+    color_scheme: str = "blue"
 
     def tts_settings(self) -> TTSSettings:
         return TTSSettings(
@@ -73,6 +74,7 @@ def load_app_settings() -> AppSettings:
             theme=data.get("theme", _DEFAULTS.theme),
             font_scale=float(data.get("font_scale", _DEFAULTS.font_scale)),
             whisper_model=whisper_model,
+            color_scheme=data.get("color_scheme", _DEFAULTS.color_scheme),
         )
     except Exception:
         return AppSettings()

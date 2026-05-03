@@ -48,7 +48,7 @@ class VoxTextApp(App):
 
     def build(self):
         from ui.theme import init as _init_theme
-        _init_theme(_startup_settings.theme)
+        _init_theme(_startup_settings.theme, _startup_settings.color_scheme)
 
         self.title = 'VoxText'
         sm = ScreenManager()

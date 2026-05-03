@@ -1,11 +1,12 @@
 {
-  "lang": "ro",
+  "lang": "ru",
   "voice_id": null,
   "tts_rate": 190,
-  "tts_volume": 1.0,
-  "stt_pause_threshold": 0.6,
+  "tts_volume": 0.4,
+  "stt_pause_threshold": 1.8,
   "max_history": 40,
   "theme": "dark",
   "font_scale": 1.1,
-  "whisper_model": "small"
+  "whisper_model": "small",
+  "color_scheme": "orange"
 }
