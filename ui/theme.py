@@ -88,6 +88,17 @@ def init(theme_name: str, scheme_name: str = "blue") -> None:
     _apply_kv()
 
 
+def apply_theme(theme_name: str) -> None:
+    """Switch dark/light theme live without restart."""
+    global _name, _t
+    _name = theme_name
+    _t = dict(THEMES.get(theme_name, THEMES["dark"]))
+    _t["btn_accent"] = COLOR_SCHEMES.get(_scheme, COLOR_SCHEMES["blue"])
+    from kivy.core.window import Window
+    Window.clearcolor = _t["window_bg"]
+    _fire_refresh_hooks()
+
+
 def apply_color_scheme(scheme_name: str) -> None:
     """Change accent colour live — updates in-memory theme dict immediately."""
     global _t, _scheme

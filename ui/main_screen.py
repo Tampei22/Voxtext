@@ -8,7 +8,7 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
 from kivy.uix.screenmanager import Screen
 
-from ui.theme import RoundedButton, get
+from ui.theme import RoundedButton, get, register_refresh_hook, unregister_refresh_hook
 from ui.i18n import load_lang, t
 
 
@@ -115,7 +115,7 @@ class MainScreen(Screen):
             spacing=dp(8),
         )
 
-        title_lbl = Label(
+        self.title_lbl = Label(
             text="VoxText",
             font_size="28sp",
             bold=True,
@@ -123,7 +123,7 @@ class MainScreen(Screen):
             halign="left",
             valign="middle",
         )
-        title_lbl.bind(size=lambda i, v: setattr(i, "text_size", v))
+        self.title_lbl.bind(size=lambda i, v: setattr(i, "text_size", v))
 
         self.gear_btn = RoundedButton(
             text="=",
@@ -136,7 +136,7 @@ class MainScreen(Screen):
             on_release=lambda _: setattr(self.manager, "current", "settings")
         )
 
-        top.add_widget(title_lbl)
+        top.add_widget(self.title_lbl)
         top.add_widget(self.gear_btn)
         root.add_widget(top)
 
@@ -171,3 +171,18 @@ class MainScreen(Screen):
             card.refresh_text()
             card.refresh_colors()
             card.btn_color = list(th["btn_normal"])
+        register_refresh_hook(self._on_theme_refresh)
+        self._on_theme_refresh()
+
+    def on_leave(self, *args):
+        unregister_refresh_hook(self._on_theme_refresh)
+
+    def _on_theme_refresh(self):
+        th = get()
+        text_c = list(th['text'])
+        self.gear_btn.btn_color = list(th['btn_normal'])
+        self.gear_btn.color = text_c
+        self.title_lbl.color = text_c
+        for card in self._cards:
+            card.refresh_colors()
+            card.btn_color = list(th['btn_normal'])

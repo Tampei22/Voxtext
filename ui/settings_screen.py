@@ -10,13 +10,15 @@ from kivy.uix.spinner import Spinner
 from storage.settings import load_app_settings, save_app_settings
 from tts.edge_tts_engine import EdgeTTSEngine
 from ui.theme import (
-    RoundedButton, COLOR_SCHEMES, apply_color_scheme,
+    RoundedButton, COLOR_SCHEMES,
+    apply_color_scheme, apply_theme,
     get, current_scheme, restart_app,
+    register_refresh_hook, unregister_refresh_hook,
 )
 from ui.i18n import load_lang, t
 
-_LANG_OPTIONS = [("RO", "ro"), ("RU", "ru"), ("EN", "en")]
-_THEME_KEYS   = [("DARK", "dark"), ("LIGHT", "light")]
+_LANG_OPTIONS   = [("RO", "ro"), ("RU", "ru"), ("EN", "en")]
+_THEME_KEYS     = [("DARK", "dark"), ("LIGHT", "light")]
 _WHISPER_MODELS = ("tiny", "base", "small", "medium")
 _SCHEME_NAMES   = {
     "blue": "Albastru", "green": "Verde",
@@ -50,6 +52,7 @@ class SettingsScreen(Screen):
         self._theme_btns:   dict[str, RoundedButton] = {}
         self._whisper_btns: dict[str, RoundedButton] = {}
         self._scheme_btns:  dict[str, RoundedButton] = {}
+        self._section_headers: list[_SectionHeader]  = []
         self._build_ui()
 
     # ── Build ─────────────────────────────────────────────────────────────
@@ -57,7 +60,6 @@ class SettingsScreen(Screen):
     def _build_ui(self):
         outer = BoxLayout(orientation="vertical", padding=dp(12), spacing=dp(8))
 
-        # Top bar
         top = BoxLayout(orientation="horizontal",
                         size_hint_y=None, height=dp(48), spacing=dp(8))
         self.back_btn = RoundedButton(
@@ -74,14 +76,13 @@ class SettingsScreen(Screen):
         top.add_widget(self.title_lbl)
         outer.add_widget(top)
 
-        # Scroll
         scroll = ScrollView(do_scroll_x=False)
         grid = GridLayout(cols=1, spacing=dp(10),
                           size_hint_y=None, padding=(0, dp(4)))
         grid.bind(minimum_height=grid.setter("height"))
 
         # ── 1. Language & Voice ───────────────────────────────────────────
-        grid.add_widget(_SectionHeader("LIMBA SI VOCE"))
+        grid.add_widget(self._make_header("LIMBA SI VOCE"))
 
         lang_row = BoxLayout(orientation="horizontal",
                              size_hint_y=None, height=dp(44), spacing=dp(8))
@@ -101,14 +102,14 @@ class SettingsScreen(Screen):
         grid.add_widget(self.voice_spinner)
 
         # ── 2. TTS ───────────────────────────────────────────────────────
-        grid.add_widget(_SectionHeader("SINTEZA VOCALA (TTS)"))
+        grid.add_widget(self._make_header("SINTEZA VOCALA (TTS)"))
         self.rate_lbl, self.rate_slider = self._slider_row(
             grid, 100, 300, self._s.tts_rate, 5, self._on_rate)
         self.vol_lbl, self.vol_slider = self._slider_row(
             grid, 0.1, 1.0, self._s.tts_volume, 0.1, self._on_volume)
 
         # ── 3. STT ───────────────────────────────────────────────────────
-        grid.add_widget(_SectionHeader("RECUNOASTERE VOCALA (STT)"))
+        grid.add_widget(self._make_header("RECUNOASTERE VOCALA (STT)"))
         self.pause_lbl, self.pause_slider = self._slider_row(
             grid, 0.3, 3.0, self._s.stt_pause_threshold, 0.1, self._on_pause)
 
@@ -130,12 +131,12 @@ class SettingsScreen(Screen):
         grid.add_widget(whisper_row)
 
         # ── 4. History ────────────────────────────────────────────────────
-        grid.add_widget(_SectionHeader("ISTORIC"))
+        grid.add_widget(self._make_header("ISTORIC"))
         self.hist_lbl, self.hist_slider = self._slider_row(
             grid, 10, 200, self._s.max_history, 10, self._on_max_history)
 
         # ── 5. Appearance ─────────────────────────────────────────────────
-        grid.add_widget(_SectionHeader("ASPECT"))
+        grid.add_widget(self._make_header("ASPECT"))
 
         theme_row = BoxLayout(orientation="horizontal",
                               size_hint_y=None, height=dp(44), spacing=dp(8))
@@ -159,8 +160,7 @@ class SettingsScreen(Screen):
         scheme_row = BoxLayout(orientation="horizontal",
                                size_hint_y=None, height=dp(52), spacing=dp(6))
         for key, color in COLOR_SCHEMES.items():
-            col_box = BoxLayout(orientation="vertical",
-                                spacing=dp(2))
+            col_box = BoxLayout(orientation="vertical", spacing=dp(2))
             dot_btn = RoundedButton(
                 text="",
                 size_hint_y=None, height=dp(34),
@@ -181,7 +181,7 @@ class SettingsScreen(Screen):
             scheme_row.add_widget(col_box)
         grid.add_widget(scheme_row)
 
-        grid.add_widget(_SectionHeader("SCALA TEXT"))
+        grid.add_widget(self._make_header("SCALA TEXT"))
         pct = int(self._s.font_scale * 100)
         self.scale_lbl, self.scale_slider = self._slider_row(
             grid, 85, 150, pct, 5, self._on_font_scale)
@@ -206,6 +206,11 @@ class SettingsScreen(Screen):
         self._refresh_whisper_buttons()
         self._refresh_scheme_buttons()
         self._refresh_voice_spinner()
+
+    def _make_header(self, text: str) -> _SectionHeader:
+        h = _SectionHeader(text)
+        self._section_headers.append(h)
+        return h
 
     # ── Slider helper ─────────────────────────────────────────────────────
 
@@ -280,6 +285,9 @@ class SettingsScreen(Screen):
     def _set_theme(self, theme_name: str):
         self._s.theme = theme_name
         save_app_settings(self._s)
+        apply_theme(theme_name)         # live switch — no restart needed
+        # apply_theme fires refresh hooks, but also call local refresh directly
+        # so the settings screen updates without waiting for the hook dispatch
         self._refresh_theme_buttons()
 
     def _set_whisper_model(self, model: str):
@@ -324,7 +332,6 @@ class SettingsScreen(Screen):
         cur = getattr(self._s, "color_scheme", "blue")
         for key, btn in self._scheme_btns.items():
             btn.btn_color = list(COLOR_SCHEMES.get(key, [0.2, 0.47, 0.9, 1]))
-            # Show a dot on the selected scheme
             btn.text = "●" if key == cur else ""
 
     def _refresh_voice_spinner(self):
@@ -342,19 +349,45 @@ class SettingsScreen(Screen):
         self._refreshing = False
 
     def _update_texts(self):
-        self.back_btn.text   = t("back")
-        self.title_lbl.text  = t("settings_title")
-        self.rate_lbl.text   = t("settings_rate",       n=self._s.tts_rate)
-        self.vol_lbl.text    = t("settings_volume",     n=f"{self._s.tts_volume:.1f}")
-        self.pause_lbl.text  = t("settings_pause",      n=f"{self._s.stt_pause_threshold:.1f}")
+        self.back_btn.text    = t("back")
+        self.title_lbl.text   = t("settings_title")
+        self.rate_lbl.text    = t("settings_rate",       n=self._s.tts_rate)
+        self.vol_lbl.text     = t("settings_volume",     n=f"{self._s.tts_volume:.1f}")
+        self.pause_lbl.text   = t("settings_pause",      n=f"{self._s.stt_pause_threshold:.1f}")
         self.whisper_lbl.text = t("settings_whisper_model", model=self._s.whisper_model)
-        self.hist_lbl.text   = t("settings_max_history", n=self._s.max_history)
-        self.scale_lbl.text  = t("settings_scale",      n=int(self._s.font_scale * 100))
+        self.hist_lbl.text    = t("settings_max_history", n=self._s.max_history)
+        self.scale_lbl.text   = t("settings_scale",      n=int(self._s.font_scale * 100))
         self.restart_btn.text = t("settings_restart")
+
+    # ── Theme refresh hook ────────────────────────────────────────────────
+
+    def _on_theme_refresh(self):
+        th = get()
+        text_c = list(th["text"])
+        for hdr in self._section_headers:
+            hdr.color = th["btn_accent"]
+        self.back_btn.color = text_c
+        self.title_lbl.color = text_c
+        self.restart_btn.btn_color = list(th["btn_accent"])
+        self.restart_btn.color = text_c
+        for lbl in (self.rate_lbl, self.vol_lbl, self.pause_lbl,
+                    self.hist_lbl, self.scale_lbl, self.whisper_lbl):
+            lbl.color = text_c
+        for btn in self._lang_btns.values():
+            btn.color = text_c
+        for btn in self._theme_btns.values():
+            btn.color = text_c
+        for btn in self._whisper_btns.values():
+            btn.color = text_c
+        self._refresh_lang_buttons()
+        self._refresh_theme_buttons()
+        self._refresh_whisper_buttons()
+        self._refresh_scheme_buttons()
 
     # ── Screen lifecycle ──────────────────────────────────────────────────
 
     def on_enter(self, *args):
+        register_refresh_hook(self._on_theme_refresh)
         load_lang()
         self._refreshing = True
         self._s = load_app_settings()
@@ -370,6 +403,10 @@ class SettingsScreen(Screen):
         self.hist_slider.value   = self._s.max_history
         self.scale_slider.value  = int(self._s.font_scale * 100)
         self._refreshing = False
+        self._on_theme_refresh()
+
+    def on_leave(self, *args):
+        unregister_refresh_hook(self._on_theme_refresh)
 
     def go_back(self, instance):
         self.manager.current = "main"

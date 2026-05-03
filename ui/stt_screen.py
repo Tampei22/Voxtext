@@ -10,7 +10,7 @@ from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import Screen
 from kivy.uix.textinput import TextInput
 
-from ui.theme import RoundedButton
+from ui.theme import RoundedButton, register_refresh_hook, unregister_refresh_hook
 from ui.i18n import load_lang, t
 
 
@@ -68,6 +68,10 @@ class STTScreen(Screen):
         self.speak_result_btn.bind(on_release=self.speak_result)
         btn_row.add_widget(self.speak_result_btn)
 
+        self.copy_btn = RoundedButton(font_size='17sp')
+        self.copy_btn.bind(on_release=self._copy_result)
+        btn_row.add_widget(self.copy_btn)
+
         self.export_btn = RoundedButton(font_size='17sp', disabled=True)
         self.export_btn.bind(on_release=lambda inst: self._show_export_popup())
         btn_row.add_widget(self.export_btn)
@@ -83,11 +87,17 @@ class STTScreen(Screen):
         self.result_input.hint_text = t('stt_result_hint')
         self.clear_btn.text = t('stt_clear')
         self.speak_result_btn.text = t('stt_speak_result')
+        self.copy_btn.text = t('stt_copy')
         self.export_btn.text = t('stt_export')
 
     def on_enter(self, *args):
         load_lang()
         self._update_texts()
+        register_refresh_hook(self._on_theme_refresh)
+        self._on_theme_refresh()
+
+    def on_leave(self, *args):
+        unregister_refresh_hook(self._on_theme_refresh)
 
     # ------------------------------------------------------------------ #
     # Pulse animation
@@ -391,3 +401,28 @@ class STTScreen(Screen):
         if self.is_recording:
             self.stop_recording()
         self.manager.current = 'main'
+
+    def _copy_result(self, instance):
+        text = self.result_input.text.strip()
+        if not text:
+            return
+        from kivy.core.clipboard import Clipboard
+        Clipboard.copy(text)
+        self.status_label.text = t('stt_copied')
+
+    def _on_theme_refresh(self):
+        from ui.theme import get as _theme
+        th = _theme()
+        normal, text_c = list(th['btn_normal']), list(th['text'])
+        for btn in (self.back_btn, self.clear_btn, self.speak_result_btn, self.copy_btn):
+            btn.btn_color = normal
+            btn.color = text_c
+        self.record_btn.color = text_c
+        if not self.is_recording:
+            self.record_btn.btn_color = normal
+        self.export_btn.color = text_c
+        if self._last_session and self._last_session.phrases:
+            self.export_btn.btn_color = list(th['btn_accent'])
+        else:
+            self.export_btn.btn_color = normal
+        self.status_label.color = text_c

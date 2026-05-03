@@ -9,7 +9,7 @@ from kivy.uix.label import Label
 from kivy.uix.screenmanager import Screen
 from kivy.uix.textinput import TextInput
 
-from ui.theme import RoundedButton
+from ui.theme import RoundedButton, register_refresh_hook, unregister_refresh_hook
 from ui.i18n import load_lang, t
 
 
@@ -34,6 +34,7 @@ class PDFScreen(Screen):
         self._stop_requested = False
         self._read_pulse_event = None
         self._read_pulse_bright = True
+        self._pending_phrase = 0
 
         layout = BoxLayout(orientation='vertical', padding=dp(16), spacing=dp(8))
 
@@ -125,6 +126,19 @@ class PDFScreen(Screen):
     def on_enter(self, *args):
         load_lang()
         self._update_texts()
+        register_refresh_hook(self._on_theme_refresh)
+        self._on_theme_refresh()
+        if not self.pdf_path:
+            self._restore_file()
+
+    def on_leave(self, *args):
+        unregister_refresh_hook(self._on_theme_refresh)
+        if self.pdf_path:
+            from storage.settings import load_app_settings, save_app_settings
+            s = load_app_settings()
+            s.last_pdf_path = self.pdf_path
+            s.last_pdf_phrase = self.current_segment
+            save_app_settings(s)
 
     def _start_read_pulse(self):
         from ui.theme import get as _theme
@@ -204,10 +218,14 @@ class PDFScreen(Screen):
     def _on_file_loaded(self, text):
         self.text_preview.text = text
         self.segments = _split_text(text)
-        self.current_segment = 0
+        phrase = self._pending_phrase
+        self._pending_phrase = 0
+        self.current_segment = min(phrase, len(self.segments) - 1) if phrase > 0 and self.segments else 0
         self.status_label.text = t('file_loaded', n=len(self.segments))
-        self.read_btn.text = t('file_read')
+        self.read_btn.text = t('file_continue') if self.current_segment > 0 else t('file_read')
         self.read_btn.disabled = False
+        if self.current_segment > 0:
+            self.restart_btn.disabled = False
 
     def _on_file_error(self, error):
         self.status_label.text = t('file_error', e=error)
@@ -299,3 +317,21 @@ class PDFScreen(Screen):
             self._stop_requested = True
             self.app_core.tts.stop()
         self.manager.current = 'main'
+
+    def _restore_file(self):
+        from storage.settings import load_app_settings
+        s = load_app_settings()
+        if s.last_pdf_path and os.path.exists(s.last_pdf_path):
+            self._pending_phrase = s.last_pdf_phrase
+            self.on_file_selected(s.last_pdf_path)
+
+    def _on_theme_refresh(self):
+        from ui.theme import get as _theme
+        th = _theme()
+        normal, text_c = list(th['btn_normal']), list(th['text'])
+        for btn in (self.back_btn, self.select_btn, self.read_btn,
+                    self.stop_btn, self.restart_btn):
+            btn.btn_color = normal
+            btn.color = text_c
+        for lbl in (self.title_label, self.file_label, self.status_label):
+            lbl.color = text_c

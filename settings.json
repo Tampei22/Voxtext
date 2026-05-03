@@ -2,11 +2,13 @@
   "lang": "ru",
   "voice_id": null,
   "tts_rate": 190,
-  "tts_volume": 0.4,
+  "tts_volume": 0.5,
   "stt_pause_threshold": 1.8,
   "max_history": 40,
   "theme": "dark",
   "font_scale": 1.1,
   "whisper_model": "small",
-  "color_scheme": "orange"
+  "color_scheme": "orange",
+  "last_pdf_path": "",
+  "last_pdf_phrase": 0
 }

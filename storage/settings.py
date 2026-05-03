@@ -28,6 +28,8 @@ class AppSettings:
     font_scale: float = 1.0
     whisper_model: str = "small"
     color_scheme: str = "blue"
+    last_pdf_path: str = ""
+    last_pdf_phrase: int = 0
 
     def tts_settings(self) -> TTSSettings:
         return TTSSettings(
@@ -75,6 +77,8 @@ def load_app_settings() -> AppSettings:
             font_scale=float(data.get("font_scale", _DEFAULTS.font_scale)),
             whisper_model=whisper_model,
             color_scheme=data.get("color_scheme", _DEFAULTS.color_scheme),
+            last_pdf_path=data.get("last_pdf_path", _DEFAULTS.last_pdf_path),
+            last_pdf_phrase=int(data.get("last_pdf_phrase", _DEFAULTS.last_pdf_phrase)),
         )
     except Exception:
         return AppSettings()

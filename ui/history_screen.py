@@ -10,7 +10,7 @@ from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import Screen
 from kivy.uix.scrollview import ScrollView
 
-from ui.theme import RoundedButton
+from ui.theme import RoundedButton, get as _get_theme, register_refresh_hook, unregister_refresh_hook
 from ui.i18n import load_lang, t
 
 
@@ -91,6 +91,11 @@ class HistoryScreen(Screen):
         self._update_texts()
         self._refresh_tab_buttons()
         self.load_current_tab()
+        register_refresh_hook(self._on_theme_refresh)
+        self._on_theme_refresh()
+
+    def on_leave(self, *args):
+        unregister_refresh_hook(self._on_theme_refresh)
 
     # ------------------------------------------------------------------ #
     # Tab switching
@@ -156,6 +161,7 @@ class HistoryScreen(Screen):
             font_size='13sp',
             halign='left',
             valign='middle',
+            color=list(_get_theme()['text']),
         )
         lbl_preview.bind(size=lbl_preview.setter('text_size'))
         info_col.add_widget(lbl_preview)
@@ -174,6 +180,10 @@ class HistoryScreen(Screen):
         play_btn = RoundedButton(text='Play', size_hint_x=None, width=dp(50), font_size='14sp')
         play_btn.bind(on_release=lambda inst, tx=raw_text: self._play_tts_job(tx))
         row.add_widget(play_btn)
+
+        copy_btn = RoundedButton(text=t('history_copy'), size_hint_x=None, width=dp(70), font_size='12sp')
+        copy_btn.bind(on_release=lambda inst, tx=raw_text: self._copy_job_text(tx))
+        row.add_widget(copy_btn)
 
         job_id = job.get('job_id', '')
         del_btn = RoundedButton(text='Del', size_hint_x=None, width=dp(50), font_size='14sp')
@@ -252,6 +262,7 @@ class HistoryScreen(Screen):
             font_size='13sp',
             halign='left',
             valign='middle',
+            color=list(_get_theme()['text']),
         )
         lbl_preview.bind(size=lbl_preview.setter('text_size'))
         info_col.add_widget(lbl_preview)
@@ -406,3 +417,21 @@ class HistoryScreen(Screen):
 
     def go_back(self, instance):
         self.manager.current = 'main'
+
+    def _copy_job_text(self, text: str):
+        if not text.strip():
+            return
+        from kivy.core.clipboard import Clipboard
+        Clipboard.copy(text)
+        self.status_label.text = t('stt_copied')
+
+    def _on_theme_refresh(self):
+        from ui.theme import get as _theme
+        th = _theme()
+        normal, text_c = list(th['btn_normal']), list(th['text'])
+        for btn in (self.back_btn, self.clear_all_btn):
+            btn.btn_color = normal
+            btn.color = text_c
+        self.title_label.color = text_c
+        self.status_label.color = text_c
+        self._refresh_tab_buttons()

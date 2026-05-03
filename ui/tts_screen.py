@@ -8,7 +8,7 @@ from kivy.uix.screenmanager import Screen
 from kivy.uix.textinput import TextInput
 
 from app_core.constants import MAX_TTS_TEXT_LENGTH
-from ui.theme import RoundedButton
+from ui.theme import RoundedButton, register_refresh_hook, unregister_refresh_hook
 from ui.i18n import load_lang, t
 
 
@@ -43,6 +43,18 @@ class TTSScreen(Screen):
             multiline=True,
         )
         layout.add_widget(self.text_input)
+
+        self.char_counter = Label(
+            text=f'0 / {MAX_TTS_TEXT_LENGTH}',
+            font_size='12sp',
+            size_hint_y=None,
+            height=sp(22),
+            halign='right',
+            valign='middle',
+        )
+        self.char_counter.bind(size=lambda i, v: setattr(i, 'text_size', v))
+        self.text_input.bind(text=self._on_text_changed)
+        layout.add_widget(self.char_counter)
 
         self.status_label = Label(
             text='',
@@ -111,6 +123,11 @@ class TTSScreen(Screen):
         self._update_texts()
         from storage.settings import load_app_settings
         self.settings = load_app_settings().tts_settings()
+        register_refresh_hook(self._on_theme_refresh)
+        self._on_theme_refresh()
+
+    def on_leave(self, *args):
+        unregister_refresh_hook(self._on_theme_refresh)
 
     def _start_speak_pulse(self):
         from ui.theme import get as _theme
@@ -208,3 +225,27 @@ class TTSScreen(Screen):
 
     def go_back(self, instance):
         self.manager.current = 'main'
+
+    def _on_text_changed(self, instance, value):
+        n = len(value)
+        self.char_counter.text = f'{n} / {MAX_TTS_TEXT_LENGTH}'
+        ratio = n / MAX_TTS_TEXT_LENGTH
+        if ratio >= 1.0:
+            self.char_counter.color = (0.90, 0.20, 0.20, 1)
+        elif ratio >= 0.85:
+            self.char_counter.color = (0.95, 0.55, 0.10, 1)
+        else:
+            from ui.theme import get as _theme
+            self.char_counter.color = list(_theme()['text_dim'])
+
+    def _on_theme_refresh(self):
+        from ui.theme import get as _theme
+        th = _theme()
+        normal, text_c = list(th['btn_normal']), list(th['text'])
+        for btn in (self.back_btn, self.speak_btn, self.stop_btn,
+                    self.clear_btn, self.paste_btn, self.settings_btn):
+            btn.btn_color = normal
+            btn.color = text_c
+        self.title_label.color = text_c
+        self.status_label.color = text_c
+        self._on_text_changed(self.text_input, self.text_input.text)
