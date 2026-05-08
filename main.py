@@ -39,11 +39,19 @@ from tts.pyttsx3_engine import Pyttsx3Engine
 class VoxTextApp(App):
     def __init__(self):
         super().__init__()
+        _whisper = WhisperSTTEngine(model_size=_startup_settings.whisper_model)
+        _google  = SpeechRecognitionEngine()
+        # Language-based engine preference: Google is primary for Romanian,
+        # Whisper is primary for English and Russian.
+        if _startup_settings.stt_engine == "google":
+            _primary_stt, _fallback_stt = _google, _whisper
+        else:
+            _primary_stt, _fallback_stt = _whisper, _google
         self.app_core = AppCore(
             tts_engine=EdgeTTSEngine(),
-            stt_engine=WhisperSTTEngine(model_size=_startup_settings.whisper_model),
+            stt_engine=_primary_stt,
             fallback_tts=Pyttsx3Engine(),
-            fallback_stt=SpeechRecognitionEngine(),
+            fallback_stt=_fallback_stt,
         )
 
     def build(self):

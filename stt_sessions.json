@@ -1,0 +1,93 @@
+[
+  {
+    "session_id": "bb2015d78c0648a9bb53271d2951afaf",
+    "lang": "ru-RU",
+    "engine": "Whisper (small)",
+    "created_at_iso": "2026-05-04T20:04:11.773366+00:00",
+    "phrases": [
+      {
+        "text": "Рады с вами познакомиться.",
+        "start": 0.32,
+        "end": 2.32
+      },
+      {
+        "text": "Сегодня прекрасный весенний день.",
+        "start": 8.288,
+        "end": 11.288
+      },
+      {
+        "text": "Я хотела бы заказать кофе с молоком.",
+        "start": 15.84,
+        "end": 18.24
+      },
+      {
+        "text": "Пожалуйста, перетвоните мне позже.",
+        "start": 23.552,
+        "end": 25.552
+      },
+      {
+        "text": "В этом ресторане подают традиционные блюда.",
+        "start": 30.816,
+        "end": 33.816
+      },
+      {
+        "text": "Завтра я пойду, блять, я кузыниматься.",
+        "start": 38.272,
+        "end": 40.672
+      },
+      {
+        "text": "Большое спасибо за оказанную помощь.",
+        "start": 45.792,
+        "end": 48.792
+      }
+    ]
+  },
+  {
+    "session_id": "5275aa4631464cf98b1661350bd826b1",
+    "lang": "ro-RO",
+    "engine": "Whisper (small)",
+    "created_at_iso": "2026-05-04T21:45:01.805368+00:00",
+    "phrases": [
+      {
+        "text": "oamenii funcționează în bine",
+        "start": 0.352,
+        "end": 2.352
+      },
+      {
+        "text": "Doar cu atorul meu.",
+        "start": 7.776,
+        "end": 9.776
+      },
+      {
+        "text": "Funcționează bine.",
+        "start": 11.552,
+        "end": 13.552
+      },
+      {
+        "text": "Au curaturul.",
+        "start": 18.272000000000002,
+        "end": 20.272000000000002
+      },
+      {
+        "text": "Au coatorul.",
+        "start": 26.976,
+        "end": 28.976
+      },
+      {
+        "text": "Funcționarea zambini",
+        "start": 33.344,
+        "end": 35.344
+      },
+      {
+        "text": "Buna ziua!",
+        "start": 42.272,
+        "end": 43.272
+      },
+      {
+        "text": "O nu-mi numit",
+        "start": 44.256,
+        "end": 45.456
+      }
+    ]
+  }
+]

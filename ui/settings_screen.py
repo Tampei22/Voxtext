@@ -7,7 +7,7 @@ from kivy.uix.label import Label
 from kivy.uix.slider import Slider
 from kivy.uix.spinner import Spinner
 
-from storage.settings import load_app_settings, save_app_settings
+from storage.settings import load_app_settings, save_app_settings, default_stt_engine
 from tts.edge_tts_engine import EdgeTTSEngine
 from ui.theme import (
     RoundedButton, COLOR_SCHEMES,
@@ -20,6 +20,7 @@ from ui.i18n import load_lang, t
 _LANG_OPTIONS   = [("RO", "ro"), ("RU", "ru"), ("EN", "en")]
 _THEME_KEYS     = [("DARK", "dark"), ("LIGHT", "light")]
 _WHISPER_MODELS = ("tiny", "base", "small", "medium")
+_STT_ENGINES    = [("Whisper", "whisper"), ("Google", "google")]
 _SCHEME_NAMES   = {
     "blue": "Albastru", "green": "Verde",
     "orange": "Portocaliu", "purple": "Violet", "red": "Rosu",
@@ -48,11 +49,14 @@ class SettingsScreen(Screen):
         self.name = "settings"
         self._s = load_app_settings()
         self._refreshing = False
-        self._lang_btns:    dict[str, RoundedButton] = {}
-        self._theme_btns:   dict[str, RoundedButton] = {}
-        self._whisper_btns: dict[str, RoundedButton] = {}
+        self._lang_btns:       dict[str, RoundedButton] = {}
+        self._theme_btns:      dict[str, RoundedButton] = {}
+        self._whisper_btns:    dict[str, RoundedButton] = {}
+        self._stt_engine_btns: dict[str, RoundedButton] = {}
         self._scheme_btns:  dict[str, RoundedButton] = {}
+        self._scheme_name_lbls: list[Label] = []
         self._section_headers: list[_SectionHeader]  = []
+        self._reco_row_lbls:   list[Label] = []
         self._build_ui()
 
     # ── Build ─────────────────────────────────────────────────────────────
@@ -130,7 +134,59 @@ class SettingsScreen(Screen):
             whisper_row.add_widget(btn)
         grid.add_widget(whisper_row)
 
-        # ── 4. History ────────────────────────────────────────────────────
+        self.stt_engine_lbl = Label(
+            text="Motor STT activ",
+            font_size="13sp", size_hint_y=None, height=dp(22),
+            halign="left", valign="middle", color=get()["text"],
+        )
+        self.stt_engine_lbl.bind(size=self.stt_engine_lbl.setter("text_size"))
+        grid.add_widget(self.stt_engine_lbl)
+
+        engine_row = BoxLayout(orientation="horizontal",
+                               size_hint_y=None, height=dp(44), spacing=dp(8))
+        for label, eng in _STT_ENGINES:
+            btn = RoundedButton(text=label, font_size="15sp",
+                                size_hint_y=None, height=dp(44))
+            btn.bind(on_release=lambda _, e=eng: self._set_stt_engine(e))
+            self._stt_engine_btns[eng] = btn
+            engine_row.add_widget(btn)
+        grid.add_widget(engine_row)
+
+        # ── 4. Benchmark recommendations ──────────────────────────────────
+        self._reco_title_hdr = _SectionHeader(t("benchmark_reco_title"))
+        self._section_headers.append(self._reco_title_hdr)
+        grid.add_widget(self._reco_title_hdr)
+
+        th = get()
+        for row_text in [
+            "Română:   Google STT  (WER 27% vs 58% Whisper)",
+            "Русский:     Whisper medium  (WER 15% vs 13% Google)",
+            "English:  Whisper medium  (WER 20% vs 37% Google)",
+        ]:
+            lbl = Label(
+                text=row_text, font_size="13sp",
+                size_hint_y=None, height=dp(24),
+                halign="left", valign="middle", color=th["text"],
+            )
+            lbl.bind(size=lbl.setter("text_size"))
+            grid.add_widget(lbl)
+            self._reco_row_lbls.append(lbl)
+
+        self._reco_note_lbl = Label(
+            text=t("benchmark_reco_note"),
+            font_size="11sp", size_hint_y=None, height=dp(52),
+            halign="left", valign="top", color=th["text"],
+        )
+        self._reco_note_lbl.bind(size=self._reco_note_lbl.setter("text_size"))
+        grid.add_widget(self._reco_note_lbl)
+
+        self._reco_apply_btn = RoundedButton(
+            size_hint_y=None, height=dp(44), font_size="14sp",
+        )
+        self._reco_apply_btn.bind(on_release=self._apply_recommendations)
+        grid.add_widget(self._reco_apply_btn)
+
+        # ── 5. History ────────────────────────────────────────────────────
         grid.add_widget(self._make_header("ISTORIC"))
         self.hist_lbl, self.hist_slider = self._slider_row(
             grid, 10, 200, self._s.max_history, 10, self._on_max_history)
@@ -148,14 +204,14 @@ class SettingsScreen(Screen):
             theme_row.add_widget(btn)
         grid.add_widget(theme_row)
 
-        scheme_lbl = Label(
+        self.scheme_lbl = Label(
             text=t("settings_color_scheme"),
             font_size="13sp", color=get()["text"],
             size_hint_y=None, height=dp(24),
             halign="left", valign="middle",
         )
-        scheme_lbl.bind(size=scheme_lbl.setter("text_size"))
-        grid.add_widget(scheme_lbl)
+        self.scheme_lbl.bind(size=self.scheme_lbl.setter("text_size"))
+        grid.add_widget(self.scheme_lbl)
 
         scheme_row = BoxLayout(orientation="horizontal",
                                size_hint_y=None, height=dp(52), spacing=dp(6))
@@ -176,6 +232,7 @@ class SettingsScreen(Screen):
                 halign="center",
             )
             name_lbl.bind(size=name_lbl.setter("text_size"))
+            self._scheme_name_lbls.append(name_lbl)
             col_box.add_widget(dot_btn)
             col_box.add_widget(name_lbl)
             scheme_row.add_widget(col_box)
@@ -204,6 +261,7 @@ class SettingsScreen(Screen):
         self._refresh_lang_buttons()
         self._refresh_theme_buttons()
         self._refresh_whisper_buttons()
+        self._refresh_stt_engine_buttons()
         self._refresh_scheme_buttons()
         self._refresh_voice_spinner()
 
@@ -272,6 +330,20 @@ class SettingsScreen(Screen):
         self._s.voice_id = None
         self._refresh_lang_buttons()
         self._refresh_voice_spinner()
+        # Auto-select the recommended engine for this language.
+        self._set_stt_engine(default_stt_engine(lang))
+
+    def _set_stt_engine(self, name: str):
+        if self._s.stt_engine == name:
+            return
+        # Swap primary ↔ fallback in the running AppCore so the change is
+        # effective immediately — no restart needed.
+        from kivy.app import App
+        core = getattr(App.get_running_app(), "app_core", None)
+        if core is not None:
+            core.stt, core._fallback_stt = core._fallback_stt, core.stt
+        self._s.stt_engine = name
+        self._refresh_stt_engine_buttons()
         save_app_settings(self._s)
 
     def _on_voice_selected(self, spinner, name):
@@ -295,6 +367,17 @@ class SettingsScreen(Screen):
         self.whisper_lbl.text = t("settings_whisper_model", model=model)
         self._refresh_whisper_buttons()
         save_app_settings(self._s)
+
+    def _apply_recommendations(self, *args):
+        from kivy.clock import Clock
+        self._s.whisper_model = "medium"
+        self._set_stt_engine(default_stt_engine(self._s.lang))
+        self._refresh_whisper_buttons()
+        save_app_settings(self._s)
+        self._reco_apply_btn.text = t("benchmark_reco_applied")
+        Clock.schedule_once(
+            lambda dt: setattr(self._reco_apply_btn, "text", t("benchmark_reco_apply")), 2
+        )
 
     def _set_scheme(self, scheme: str):
         self._s.color_scheme = scheme
@@ -328,6 +411,13 @@ class SettingsScreen(Screen):
                 else th["btn_normal"]
             )
 
+    def _refresh_stt_engine_buttons(self):
+        th = get()
+        for eng, btn in self._stt_engine_btns.items():
+            btn.btn_color = list(
+                th["btn_accent"] if eng == self._s.stt_engine else th["btn_normal"]
+            )
+
     def _refresh_scheme_buttons(self):
         cur = getattr(self._s, "color_scheme", "blue")
         for key, btn in self._scheme_btns.items():
@@ -358,6 +448,9 @@ class SettingsScreen(Screen):
         self.hist_lbl.text    = t("settings_max_history", n=self._s.max_history)
         self.scale_lbl.text   = t("settings_scale",      n=int(self._s.font_scale * 100))
         self.restart_btn.text = t("settings_restart")
+        self._reco_title_hdr.text = t("benchmark_reco_title")
+        self._reco_note_lbl.text  = t("benchmark_reco_note")
+        self._reco_apply_btn.text = t("benchmark_reco_apply")
 
     # ── Theme refresh hook ────────────────────────────────────────────────
 
@@ -371,7 +464,8 @@ class SettingsScreen(Screen):
         self.restart_btn.btn_color = list(th["btn_accent"])
         self.restart_btn.color = text_c
         for lbl in (self.rate_lbl, self.vol_lbl, self.pause_lbl,
-                    self.hist_lbl, self.scale_lbl, self.whisper_lbl):
+                    self.hist_lbl, self.scale_lbl, self.whisper_lbl,
+                    self.stt_engine_lbl):
             lbl.color = text_c
         for btn in self._lang_btns.values():
             btn.color = text_c
@@ -379,9 +473,19 @@ class SettingsScreen(Screen):
             btn.color = text_c
         for btn in self._whisper_btns.values():
             btn.color = text_c
+        for btn in self._stt_engine_btns.values():
+            btn.color = text_c
+        self.scheme_lbl.color = text_c
+        for lbl in self._scheme_name_lbls:
+            lbl.color = text_c
+        for lbl in self._reco_row_lbls:
+            lbl.color = text_c
+        self._reco_note_lbl.color = text_c
+        self._reco_apply_btn.color = text_c
         self._refresh_lang_buttons()
         self._refresh_theme_buttons()
         self._refresh_whisper_buttons()
+        self._refresh_stt_engine_buttons()
         self._refresh_scheme_buttons()
 
     # ── Screen lifecycle ──────────────────────────────────────────────────
@@ -395,6 +499,7 @@ class SettingsScreen(Screen):
         self._refresh_lang_buttons()
         self._refresh_theme_buttons()
         self._refresh_whisper_buttons()
+        self._refresh_stt_engine_buttons()
         self._refresh_scheme_buttons()
         self._refresh_voice_spinner()
         self.rate_slider.value   = self._s.tts_rate

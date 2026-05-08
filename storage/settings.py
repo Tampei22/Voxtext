@@ -16,6 +16,13 @@ SETTINGS_FILE: Path = BASE_DIR / "settings.json"
 _LANG_TO_STT = {"ro": "ro-RO", "ru": "ru-RU", "en": "en-US"}
 
 
+def default_stt_engine(lang: str) -> str:
+    """Return the recommended STT engine for a given language.
+    Google STT outperforms Whisper on Romanian (WER 27% vs 58%).
+    Whisper is competitive/better for English and Russian."""
+    return "google" if lang == "ro" else "whisper"
+
+
 @dataclass
 class AppSettings:
     lang: str = "ro"
@@ -27,6 +34,7 @@ class AppSettings:
     theme: str = "dark"
     font_scale: float = 1.0
     whisper_model: str = "small"
+    stt_engine: str = "whisper"   # "whisper" | "google"
     color_scheme: str = "blue"
     last_pdf_path: str = ""
     last_pdf_phrase: int = 0
@@ -66,8 +74,13 @@ def load_app_settings() -> AppSettings:
         from stt.whisper_engine import VALID_MODELS
         if whisper_model not in VALID_MODELS:
             whisper_model = _DEFAULTS.whisper_model
+        lang = data.get("lang", _DEFAULTS.lang)
+        # If stt_engine is missing from JSON (old settings file), derive it from lang.
+        raw_engine = data.get("stt_engine")
+        stt_engine = raw_engine if raw_engine in ("whisper", "google") \
+            else default_stt_engine(lang)
         return AppSettings(
-            lang=data.get("lang", _DEFAULTS.lang),
+            lang=lang,
             voice_id=data.get("voice_id", _DEFAULTS.voice_id),
             tts_rate=int(data.get("tts_rate", _DEFAULTS.tts_rate)),
             tts_volume=float(data.get("tts_volume", _DEFAULTS.tts_volume)),
@@ -76,6 +89,7 @@ def load_app_settings() -> AppSettings:
             theme=data.get("theme", _DEFAULTS.theme),
             font_scale=float(data.get("font_scale", _DEFAULTS.font_scale)),
             whisper_model=whisper_model,
+            stt_engine=stt_engine,
             color_scheme=data.get("color_scheme", _DEFAULTS.color_scheme),
             last_pdf_path=data.get("last_pdf_path", _DEFAULTS.last_pdf_path),
             last_pdf_phrase=int(data.get("last_pdf_phrase", _DEFAULTS.last_pdf_phrase)),

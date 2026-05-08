@@ -178,7 +178,7 @@ class HistoryScreen(Screen):
         row.add_widget(info_col)
 
         play_btn = RoundedButton(text='Play', size_hint_x=None, width=dp(50), font_size='14sp')
-        play_btn.bind(on_release=lambda inst, tx=raw_text: self._play_tts_job(tx))
+        play_btn.bind(on_release=lambda inst, j=job: self._play_tts_job(j))
         row.add_widget(play_btn)
 
         copy_btn = RoundedButton(text=t('history_copy'), size_hint_x=None, width=dp(70), font_size='12sp')
@@ -192,21 +192,57 @@ class HistoryScreen(Screen):
 
         self.jobs_grid.add_widget(row)
 
-    def _play_tts_job(self, text: str):
+    def _play_tts_job(self, job: dict):
+        text = job.get('text', '')
         if not text.strip():
             return
-        from storage.settings import load_app_settings
-        settings = load_app_settings().tts_settings()
         self.status_label.text = t('history_playing')
-        threading.Thread(
-            target=self._do_speak,
-            args=(text, settings),
-            daemon=True,
-        ).start()
+        output_path = job.get('output_path')
+        if output_path and os.path.exists(output_path):
+            threading.Thread(
+                target=self._do_play_mp3,
+                args=(output_path,),
+                daemon=True,
+            ).start()
+        else:
+            from storage.settings import load_app_settings
+            settings = load_app_settings().tts_settings()
+            threading.Thread(
+                target=self._do_speak_direct,
+                args=(text, settings),
+                daemon=True,
+            ).start()
 
-    def _do_speak(self, text, settings):
+    def _do_play_mp3(self, path: str):
+        import sys, subprocess
+        script = (
+            "import pygame, sys\n"
+            "pygame.mixer.init()\n"
+            f"pygame.mixer.music.load({repr(path)})\n"
+            "pygame.mixer.music.play()\n"
+            "while pygame.mixer.music.get_busy():\n"
+            "    pygame.time.wait(100)\n"
+            "pygame.mixer.quit()\n"
+        )
         try:
-            self.app_core.speak_text(text, settings)
+            proc = subprocess.Popen(
+                [sys.executable, "-c", script],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.PIPE,
+            )
+            _, stderr_bytes = proc.communicate()
+            if proc.returncode != 0:
+                raise RuntimeError(stderr_bytes.decode("utf-8", errors="replace").strip())
+            Clock.schedule_once(
+                lambda dt: setattr(self.status_label, 'text', t('history_done')), 0
+            )
+        except Exception as e:
+            msg = t('history_error', e=e)
+            Clock.schedule_once(lambda dt, m=msg: setattr(self.status_label, 'text', m), 0)
+
+    def _do_speak_direct(self, text, settings):
+        try:
+            self.app_core.tts.speak(text, settings)
             Clock.schedule_once(
                 lambda dt: setattr(self.status_label, 'text', t('history_done')), 0
             )

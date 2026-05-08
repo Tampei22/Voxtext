@@ -1,0 +1,399 @@
+{
+  "metadata": {
+    "language": "ru",
+    "whisper_model": "small",
+    "timestamp": "2026-05-04T20:43:36.343850+00:00",
+    "total_phrases": 20,
+    "hardware": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel"
+  },
+  "results": [
+    {
+      "phrase_id": 1,
+      "reference": "Добрый день, как вас зовут?",
+      "audio_duration_s": 3.648,
+      "whisper": {
+        "transcription": "Добрый день, как вас зовут.",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 1.753,
+        "rtf": 0.481
+      },
+      "google": {
+        "transcription": "Добрый день Как Вас зовут",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 0.514,
+        "rtf": 0.141
+      }
+    },
+    {
+      "phrase_id": 2,
+      "reference": "Сегодня на улице хорошая погода.",
+      "audio_duration_s": 4.352,
+      "whisper": {
+        "transcription": "Сегодня на улице хорошая погода.",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 1.734,
+        "rtf": 0.399
+      },
+      "google": {
+        "transcription": "сегодня на улице хорошая погода",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 0.778,
+        "rtf": 0.179
+      }
+    },
+    {
+      "phrase_id": 3,
+      "reference": "Пожалуйста, говорите немного медленнее.",
+      "audio_duration_s": 3.968,
+      "whisper": {
+        "transcription": "Пожалуйста, говорите немного медленнее.",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 1.736,
+        "rtf": 0.437
+      },
+      "google": {
+        "transcription": "Пожалуйста говорите немного медленнее",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 0.555,
+        "rtf": 0.14
+      }
+    },
+    {
+      "phrase_id": 4,
+      "reference": "Я заказал два кофе и пирожное.",
+      "audio_duration_s": 4.416,
+      "whisper": {
+        "transcription": "Я заказал два кофе и пирожные.",
+        "wer": 0.1667,
+        "cer": 0.0417,
+        "inference_time_s": 1.772,
+        "rtf": 0.401
+      },
+      "google": {
+        "transcription": "Я заказал два кофе и пирожное",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 0.71,
+        "rtf": 0.161
+      }
+    },
+    {
+      "phrase_id": 5,
+      "reference": "На улице сегодня двадцать градусов тепла.",
+      "audio_duration_s": 3.136,
+      "whisper": {
+        "transcription": "Это сегодня 20 градусов тепла",
+        "wer": 0.5,
+        "cer": 0.4286,
+        "inference_time_s": 1.682,
+        "rtf": 0.536
+      },
+      "google": {
+        "transcription": "сегодня 20° тепла",
+        "wer": 0.6667,
+        "cer": 0.6571,
+        "inference_time_s": 0.531,
+        "rtf": 0.169
+      }
+    },
+    {
+      "phrase_id": 6,
+      "reference": "Завтра мы едем в горы всей семьёй.",
+      "audio_duration_s": 3.264,
+      "whisper": {
+        "transcription": "Завтра мы едем в горы всей семьей.",
+        "wer": 0.1429,
+        "cer": 0.037,
+        "inference_time_s": 1.742,
+        "rtf": 0.534
+      },
+      "google": {
+        "transcription": "Завтра мы едем в горы всей семьёй",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 0.538,
+        "rtf": 0.165
+      }
+    },
+    {
+      "phrase_id": 7,
+      "reference": "Эта книга очень интересная и познавательная.",
+      "audio_duration_s": 4.032,
+      "whisper": {
+        "transcription": "Тактига очень интересная и познавательная.",
+        "wer": 0.3333,
+        "cer": 0.0526,
+        "inference_time_s": 1.767,
+        "rtf": 0.438
+      },
+      "google": {
+        "transcription": "книга очень интересная и познавательная",
+        "wer": 0.1667,
+        "cer": 0.0789,
+        "inference_time_s": 0.747,
+        "rtf": 0.185
+      }
+    },
+    {
+      "phrase_id": 8,
+      "reference": "Откройте окно, пожалуйста.",
+      "audio_duration_s": 19.968,
+      "whisper": {
+        "transcription": "Эти окно, пожалуйста.",
+        "wer": 0.3333,
+        "cer": 0.3182,
+        "inference_time_s": 1.705,
+        "rtf": 0.085
+      },
+      "google": {
+        "transcription": "окно пожалуйста",
+        "wer": 0.3333,
+        "cer": 0.3636,
+        "inference_time_s": 1.284,
+        "rtf": 0.064
+      }
+    },
+    {
+      "phrase_id": 9,
+      "reference": "Я хочу купить билет на поезд на завтра.",
+      "audio_duration_s": 4.224,
+      "whisper": {
+        "transcription": "Я хочу купить билет на повезда завтра.",
+        "wer": 0.25,
+        "cer": 0.0645,
+        "inference_time_s": 1.769,
+        "rtf": 0.419
+      },
+      "google": {
+        "transcription": "я хочу купить билет на поезд на завтра",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 0.618,
+        "rtf": 0.146
+      }
+    },
+    {
+      "phrase_id": 10,
+      "reference": "Мне очень нравится классическая музыка.",
+      "audio_duration_s": 4.16,
+      "whisper": {
+        "transcription": "Мне очень нравится классическая музыка",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 1.676,
+        "rtf": 0.403
+      },
+      "google": {
+        "transcription": "Мне очень нравится классическая",
+        "wer": 0.2,
+        "cer": 0.1765,
+        "inference_time_s": 0.638,
+        "rtf": 0.153
+      }
+    },
+    {
+      "phrase_id": 11,
+      "reference": "Система распознавания речи работает хорошо.",
+      "audio_duration_s": 5.056,
+      "whisper": {
+        "transcription": "Система распознавания речи работает хорошо.",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 1.779,
+        "rtf": 0.352
+      },
+      "google": {
+        "transcription": "система распознавания речи работает хорошо",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 0.756,
+        "rtf": 0.15
+      }
+    },
+    {
+      "phrase_id": 12,
+      "reference": "Автоматическое распознавание речи очень полезно.",
+      "audio_duration_s": 4.736,
+      "whisper": {
+        "transcription": "Автоматическое распознавание речи очень полезно.",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 1.8,
+        "rtf": 0.38
+      },
+      "google": {
+        "transcription": "автоматическое распознавание речи очень полезно",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 0.637,
+        "rtf": 0.134
+      }
+    },
+    {
+      "phrase_id": 13,
+      "reference": "Мой компьютер сегодня работает неправильно.",
+      "audio_duration_s": 3.456,
+      "whisper": {
+        "transcription": "Мой компьютер сегодня работает неправильно.",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 1.713,
+        "rtf": 0.496
+      },
+      "google": {
+        "transcription": "мой компьютер сегодня работает неправильно",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 0.528,
+        "rtf": 0.153
+      }
+    },
+    {
+      "phrase_id": 14,
+      "reference": "Пожалуйста, переведите это предложение на русский.",
+      "audio_duration_s": 3.456,
+      "whisper": {
+        "transcription": "Переведите это предложение на русский.",
+        "wer": 0.1667,
+        "cer": 0.2326,
+        "inference_time_s": 1.786,
+        "rtf": 0.517
+      },
+      "google": {
+        "transcription": "Переведите это предложение на русский",
+        "wer": 0.1667,
+        "cer": 0.2326,
+        "inference_time_s": 0.656,
+        "rtf": 0.19
+      }
+    },
+    {
+      "phrase_id": 15,
+      "reference": "Я закончил читать книгу на прошлой неделе.",
+      "audio_duration_s": 4.096,
+      "whisper": {
+        "transcription": "Я закончила читать книгу на прошлый день.",
+        "wer": 0.4286,
+        "cer": 0.1714,
+        "inference_time_s": 1.811,
+        "rtf": 0.442
+      },
+      "google": {
+        "transcription": "Я закончил читать книгу на прошлой неделе",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 0.737,
+        "rtf": 0.18
+      }
+    },
+    {
+      "phrase_id": 16,
+      "reference": "Компьютерная программа анализирует аудиоданные в реальном времени.",
+      "audio_duration_s": 5.824,
+      "whisper": {
+        "transcription": "Компедурная программа анализирует аудиодануя в реальном времени.",
+        "wer": 0.2857,
+        "cer": 0.1186,
+        "inference_time_s": 1.896,
+        "rtf": 0.326
+      },
+      "google": {
+        "transcription": "компьютерная программа анализирует аудиоданные в реальном времени",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 0.811,
+        "rtf": 0.139
+      }
+    },
+    {
+      "phrase_id": 17,
+      "reference": "Распознавание речи требует алгоритмов машинного обучения.",
+      "audio_duration_s": 4.416,
+      "whisper": {
+        "transcription": "Они речи требуют алгоритм в машиновой обучении.",
+        "wer": 1.0,
+        "cer": 0.3137,
+        "inference_time_s": 1.869,
+        "rtf": 0.423
+      },
+      "google": {
+        "transcription": "речи требует алгоритмов машинного обучения",
+        "wer": 0.1667,
+        "cer": 0.2549,
+        "inference_time_s": 0.827,
+        "rtf": 0.187
+      }
+    },
+    {
+      "phrase_id": 18,
+      "reference": "Нейронная модель обрабатывает акустический сигнал за миллисекунды.",
+      "audio_duration_s": 5.504,
+      "whisper": {
+        "transcription": "На модель обрабатывают акустические сигналы за миллисекунды.",
+        "wer": 0.5714,
+        "cer": 0.1695,
+        "inference_time_s": 1.866,
+        "rtf": 0.339
+      },
+      "google": {
+        "transcription": "модель обрабатывают акустический сигнал за миллисекунды",
+        "wer": 0.2857,
+        "cer": 0.1695,
+        "inference_time_s": 1.011,
+        "rtf": 0.184
+      }
+    },
+    {
+      "phrase_id": 19,
+      "reference": "Частота ошибок на уровне слов измеряет точность транскрипции.",
+      "audio_duration_s": 5.568,
+      "whisper": {
+        "transcription": "Чистота ошибок на уровне слов измеряет точность раскрытия.",
+        "wer": 0.25,
+        "cer": 0.1321,
+        "inference_time_s": 1.838,
+        "rtf": 0.33
+      },
+      "google": {
+        "transcription": "частота ошибок на уровне слов измеряет точность транскрипции",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 0.896,
+        "rtf": 0.161
+      }
+    },
+    {
+      "phrase_id": 20,
+      "reference": "Благодарю вас за вашу ценную помощь и поддержку.",
+      "audio_duration_s": 3.904,
+      "whisper": {
+        "transcription": "Благодарю вас за нашу цену и помощь и поддержку.",
+        "wer": 0.375,
+        "cer": 0.075,
+        "inference_time_s": 1.853,
+        "rtf": 0.475
+      },
+      "google": {
+        "transcription": "помощь и поддержку",
+        "wer": 0.625,
+        "cer": 0.6,
+        "inference_time_s": 0.714,
+        "rtf": 0.183
+      }
+    }
+  ],
+  "summary": {
+    "whisper_avg_wer": 0.2402,
+    "whisper_avg_cer": 0.1078,
+    "whisper_avg_rtf": 0.411,
+    "google_avg_wer": 0.1305,
+    "google_avg_cer": 0.1267,
+    "google_avg_rtf": 0.158
+  }
+}

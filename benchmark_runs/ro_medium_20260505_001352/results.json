@@ -1,0 +1,399 @@
+{
+  "metadata": {
+    "language": "ro",
+    "whisper_model": "medium",
+    "timestamp": "2026-05-04T21:18:38.112411+00:00",
+    "total_phrases": 20,
+    "hardware": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel"
+  },
+  "results": [
+    {
+      "phrase_id": 1,
+      "reference": "Bună ziua, cum vă numiți?",
+      "audio_duration_s": 3.584,
+      "whisper": {
+        "transcription": "Bună ziua, cum v-a numit?",
+        "wer": 0.4,
+        "cer": 0.1579,
+        "inference_time_s": 6.268,
+        "rtf": 1.749
+      },
+      "google": {
+        "transcription": "cum vă numiți",
+        "wer": 0.4,
+        "cer": 0.4211,
+        "inference_time_s": 0.659,
+        "rtf": 0.184
+      }
+    },
+    {
+      "phrase_id": 2,
+      "reference": "Astăzi este o zi frumoasă afară.",
+      "audio_duration_s": 4.032,
+      "whisper": {
+        "transcription": "Astăzi, este uzi frumos afar.",
+        "wer": 0.6667,
+        "cer": 0.1538,
+        "inference_time_s": 6.267,
+        "rtf": 1.554
+      },
+      "google": {
+        "transcription": "Astăzi este o zi frumoasă afară",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 0.592,
+        "rtf": 0.147
+      }
+    },
+    {
+      "phrase_id": 3,
+      "reference": "Vă rog să repetați mai rar.",
+      "audio_duration_s": 3.264,
+      "whisper": {
+        "transcription": "Vă rog să repetați mai rar.",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 6.253,
+        "rtf": 1.916
+      },
+      "google": {
+        "transcription": "vă rog să Repetați mai rar",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 0.758,
+        "rtf": 0.232
+      }
+    },
+    {
+      "phrase_id": 4,
+      "reference": "Am comandat două cafele și o prăjitură.",
+      "audio_duration_s": 4.8,
+      "whisper": {
+        "transcription": "Într-un moment dat, două cafele, așa, prajitura.",
+        "wer": 0.8571,
+        "cer": 0.4375,
+        "inference_time_s": 7.204,
+        "rtf": 1.501
+      },
+      "google": {
+        "transcription": "două cafele și o prăjitură",
+        "wer": 0.2857,
+        "cer": 0.3125,
+        "inference_time_s": 0.991,
+        "rtf": 0.207
+      }
+    },
+    {
+      "phrase_id": 5,
+      "reference": "Temperatura de afară este de douăzeci de grade.",
+      "audio_duration_s": 5.312,
+      "whisper": {
+        "transcription": "Temperatura de afara este de 20 de grade.",
+        "wer": 0.25,
+        "cer": 0.2308,
+        "inference_time_s": 6.137,
+        "rtf": 1.155
+      },
+      "google": {
+        "transcription": "temperatura de afară este de 90°",
+        "wer": 0.375,
+        "cer": 0.3846,
+        "inference_time_s": 0.772,
+        "rtf": 0.145
+      }
+    },
+    {
+      "phrase_id": 6,
+      "reference": "Mâine mergem la munte cu întreaga familie.",
+      "audio_duration_s": 6.528,
+      "whisper": {
+        "transcription": "Mâine mergem la Monte Contra, în o familie.",
+        "wer": 0.5714,
+        "cer": 0.2,
+        "inference_time_s": 6.413,
+        "rtf": 0.982
+      },
+      "google": {
+        "transcription": "Mâine mergem la munte cu întreaga familie",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 0.964,
+        "rtf": 0.148
+      }
+    },
+    {
+      "phrase_id": 7,
+      "reference": "Cartea aceasta este foarte interesantă.",
+      "audio_duration_s": 5.12,
+      "whisper": {
+        "transcription": "De aceea ce astăzi stiu, este foarte interesantă.",
+        "wer": 1.0,
+        "cer": 0.3529,
+        "inference_time_s": 6.535,
+        "rtf": 1.276
+      },
+      "google": {
+        "transcription": "aceasta este foarte interesantă",
+        "wer": 0.2,
+        "cer": 0.1765,
+        "inference_time_s": 1.165,
+        "rtf": 0.227
+      }
+    },
+    {
+      "phrase_id": 8,
+      "reference": "Deschideți fereastra, vă rog frumos.",
+      "audio_duration_s": 2.816,
+      "whisper": {
+        "transcription": "Fără astra vă rog frumos.",
+        "wer": 0.4,
+        "cer": 0.4,
+        "inference_time_s": 6.924,
+        "rtf": 2.459
+      },
+      "google": {
+        "transcription": "fereastră vă rog frumos",
+        "wer": 0.4,
+        "cer": 0.3667,
+        "inference_time_s": 0.717,
+        "rtf": 0.254
+      }
+    },
+    {
+      "phrase_id": 9,
+      "reference": "Vreau să cumpăr un bilet de tren pentru mâine.",
+      "audio_duration_s": 4.16,
+      "whisper": {
+        "transcription": "Vreau s-o cumpăr un bilet de tine pentru mine.",
+        "wer": 0.3333,
+        "cer": 0.1351,
+        "inference_time_s": 6.969,
+        "rtf": 1.675
+      },
+      "google": {
+        "transcription": "Vreau să cumpăr un bilet de tren pentru mâine",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 0.774,
+        "rtf": 0.186
+      }
+    },
+    {
+      "phrase_id": 10,
+      "reference": "Îmi place foarte mult muzica clasică.",
+      "audio_duration_s": 3.712,
+      "whisper": {
+        "transcription": "Ce foarte mult, muzica clasică.",
+        "wer": 0.3333,
+        "cer": 0.1935,
+        "inference_time_s": 6.362,
+        "rtf": 1.714
+      },
+      "google": {
+        "transcription": "ce foarte mult muzică clasică",
+        "wer": 0.5,
+        "cer": 0.2258,
+        "inference_time_s": 1.029,
+        "rtf": 0.277
+      }
+    },
+    {
+      "phrase_id": 11,
+      "reference": "Sistemul de recunoaștere vocală funcționează bine.",
+      "audio_duration_s": 4.608,
+      "whisper": {
+        "transcription": "Sistemul de recunoștere vocală funcționează bine.",
+        "wer": 0.1667,
+        "cer": 0.0227,
+        "inference_time_s": 6.914,
+        "rtf": 1.501
+      },
+      "google": {
+        "transcription": "sistemul de recunoaștere vocală funcționează bine",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 0.657,
+        "rtf": 0.143
+      }
+    },
+    {
+      "phrase_id": 12,
+      "reference": "Recunoașterea automată a vorbirii este utilă.",
+      "audio_duration_s": 5.696,
+      "whisper": {
+        "transcription": "Precnoșterea automată a urmării este ucilă.",
+        "wer": 0.5,
+        "cer": 0.2051,
+        "inference_time_s": 6.915,
+        "rtf": 1.214
+      },
+      "google": {
+        "transcription": "recunoașterea automată a vorbirii este utilă",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 1.086,
+        "rtf": 0.191
+      }
+    },
+    {
+      "phrase_id": 13,
+      "reference": "Calculatorul meu nu funcționează corect astăzi.",
+      "audio_duration_s": 4.032,
+      "whisper": {
+        "transcription": "Pătorul meu nu funcționează corect, astăzi.",
+        "wer": 0.1667,
+        "cer": 0.1707,
+        "inference_time_s": 7.003,
+        "rtf": 1.737
+      },
+      "google": {
+        "transcription": "motorul meu nu funcționează corect astăzi",
+        "wer": 0.1667,
+        "cer": 0.1707,
+        "inference_time_s": 0.926,
+        "rtf": 0.23
+      }
+    },
+    {
+      "phrase_id": 14,
+      "reference": "Vă rog să traduceți această propoziție în română.",
+      "audio_duration_s": 5.376,
+      "whisper": {
+        "transcription": "Acum trebuie să vă abonați la canalul meu.",
+        "wer": 0.875,
+        "cer": 0.8049,
+        "inference_time_s": 6.813,
+        "rtf": 1.267
+      },
+      "google": {
+        "transcription": "traduceți această propoziție în română",
+        "wer": 0.375,
+        "cer": 0.1707,
+        "inference_time_s": 1.169,
+        "rtf": 0.217
+      }
+    },
+    {
+      "phrase_id": 15,
+      "reference": "Am terminat de citit cartea săptămâna trecută.",
+      "audio_duration_s": 2.752,
+      "whisper": {
+        "transcription": "Am terminat de citesc cartea, săptămâna.",
+        "wer": 0.2857,
+        "cer": 0.2564,
+        "inference_time_s": 6.884,
+        "rtf": 2.501
+      },
+      "google": {
+        "transcription": "am terminat de citit cartea",
+        "wer": 0.2857,
+        "cer": 0.4103,
+        "inference_time_s": 0.764,
+        "rtf": 0.278
+      }
+    },
+    {
+      "phrase_id": 16,
+      "reference": "Programul de calculator analizează datele audio în timp real.",
+      "audio_duration_s": 5.12,
+      "whisper": {
+        "transcription": "Deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, deci, de",
+        "wer": 1.0,
+        "cer": 1.0,
+        "inference_time_s": 26.55,
+        "rtf": 5.186
+      },
+      "google": {
+        "transcription": "muzică cultură Analizează datele audio în timp real",
+        "wer": 0.3333,
+        "cer": 0.2692,
+        "inference_time_s": 1.245,
+        "rtf": 0.243
+      }
+    },
+    {
+      "phrase_id": 17,
+      "reference": "Recunoașterea vorbirii necesită algoritmi de învățare automată.",
+      "audio_duration_s": 5.184,
+      "whisper": {
+        "transcription": "Recunoșterea vorbirii nici este stalgurit de evoțară automată.",
+        "wer": 0.7143,
+        "cer": 0.25,
+        "inference_time_s": 7.67,
+        "rtf": 1.479
+      },
+      "google": {
+        "transcription": "recunoașterea vorbirii nice taguri de învățare automată",
+        "wer": 0.2857,
+        "cer": 0.1607,
+        "inference_time_s": 1.254,
+        "rtf": 0.242
+      }
+    },
+    {
+      "phrase_id": 18,
+      "reference": "Modelul neuronal procesează semnalul acustic în milisecunde.",
+      "audio_duration_s": 8.384,
+      "whisper": {
+        "transcription": "O neomnioară nauă cu șesemnau acustic în milisecunde.",
+        "wer": 0.7143,
+        "cer": 0.3774,
+        "inference_time_s": 7.478,
+        "rtf": 0.892
+      },
+      "google": {
+        "transcription": "Uniunea Europeană milisecunde",
+        "wer": 0.8571,
+        "cer": 0.6226,
+        "inference_time_s": 1.759,
+        "rtf": 0.21
+      }
+    },
+    {
+      "phrase_id": 19,
+      "reference": "Rata de eroare la nivel de cuvânt măsoară acuratețea transcrierii.",
+      "audio_duration_s": 4.736,
+      "whisper": {
+        "transcription": "În felul nivel de cuvinte, mă sună curatăția transcrierei.",
+        "wer": 0.9,
+        "cer": 0.375,
+        "inference_time_s": 7.43,
+        "rtf": 1.569
+      },
+      "google": {
+        "transcription": "nivel de cuvânt măsoară cu rotițe transcriere",
+        "wer": 0.7,
+        "cer": 0.3571,
+        "inference_time_s": 1.455,
+        "rtf": 0.307
+      }
+    },
+    {
+      "phrase_id": 20,
+      "reference": "Vă mulțumesc frumos pentru ajutorul dumneavoastră prețios.",
+      "audio_duration_s": 4.672,
+      "whisper": {
+        "transcription": "Mulțumesc frumos pentru a jute-o rodă, mi-e vast rupritios.",
+        "wer": 1.0,
+        "cer": 0.2353,
+        "inference_time_s": 7.767,
+        "rtf": 1.662
+      },
+      "google": {
+        "transcription": "Mulțumesc frumos pentru ajutorul dumneavoastră prețios",
+        "wer": 0.1429,
+        "cer": 0.0392,
+        "inference_time_s": 0.624,
+        "rtf": 0.134
+      }
+    }
+  ],
+  "summary": {
+    "whisper_avg_wer": 0.5567,
+    "whisper_avg_cer": 0.298,
+    "whisper_avg_rtf": 1.749,
+    "google_avg_wer": 0.2654,
+    "google_avg_cer": 0.2044,
+    "google_avg_rtf": 0.21
+  }
+}

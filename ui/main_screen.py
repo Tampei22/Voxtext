@@ -136,7 +136,19 @@ class MainScreen(Screen):
             on_release=lambda _: setattr(self.manager, "current", "settings")
         )
 
+        self.bench_btn = RoundedButton(
+            text="B",
+            font_size="16sp",
+            size_hint=(None, None),
+            size=(dp(36), dp(40)),
+            corner_radius=10,
+        )
+        self.bench_btn.bind(
+            on_release=lambda _: setattr(self.manager, "current", "benchmark")
+        )
+
         top.add_widget(self.title_lbl)
+        top.add_widget(self.bench_btn)
         top.add_widget(self.gear_btn)
         root.add_widget(top)
 
@@ -180,9 +192,12 @@ class MainScreen(Screen):
     def _on_theme_refresh(self):
         th = get()
         text_c = list(th['text'])
-        self.gear_btn.btn_color = list(th['btn_normal'])
+        normal = list(th['btn_normal'])
+        self.gear_btn.btn_color = normal
         self.gear_btn.color = text_c
+        self.bench_btn.btn_color = normal
+        self.bench_btn.color = text_c
         self.title_lbl.color = text_c
         for card in self._cards:
             card.refresh_colors()
-            card.btn_color = list(th['btn_normal'])
+            card.btn_color = normal

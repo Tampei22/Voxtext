@@ -133,6 +133,9 @@ class PDFScreen(Screen):
 
     def on_leave(self, *args):
         unregister_refresh_hook(self._on_theme_refresh)
+        if self.is_speaking:
+            self._stop_requested = True
+            self.app_core.tts.stop()
         if self.pdf_path:
             from storage.settings import load_app_settings, save_app_settings
             s = load_app_settings()

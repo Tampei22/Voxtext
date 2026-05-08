@@ -408,7 +408,11 @@ class STTScreen(Screen):
             return
         from kivy.core.clipboard import Clipboard
         Clipboard.copy(text)
+        prev = self.status_label.text
         self.status_label.text = t('stt_copied')
+        Clock.schedule_once(
+            lambda dt, p=prev: setattr(self.status_label, 'text', p), 1.5
+        )
 
     def _on_theme_refresh(self):
         from ui.theme import get as _theme

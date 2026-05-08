@@ -1,0 +1,399 @@
+{
+  "metadata": {
+    "language": "en",
+    "whisper_model": "small",
+    "timestamp": "2026-05-04T20:46:21.637265+00:00",
+    "total_phrases": 20,
+    "hardware": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel"
+  },
+  "results": [
+    {
+      "phrase_id": 1,
+      "reference": "Good morning, what is your name?",
+      "audio_duration_s": 3.456,
+      "whisper": {
+        "transcription": "Good morning. What is your name?",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 1.709,
+        "rtf": 0.495
+      },
+      "google": {
+        "transcription": "good morning what is your name",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 0.574,
+        "rtf": 0.166
+      }
+    },
+    {
+      "phrase_id": 2,
+      "reference": "Today the weather outside is beautiful.",
+      "audio_duration_s": 4.16,
+      "whisper": {
+        "transcription": "to make the weather outside is beautiful",
+        "wer": 0.3333,
+        "cer": 0.0909,
+        "inference_time_s": 1.744,
+        "rtf": 0.419
+      },
+      "google": {
+        "transcription": "tomorrow's weather outside is beautiful",
+        "wer": 0.3333,
+        "cer": 0.2121,
+        "inference_time_s": 0.838,
+        "rtf": 0.201
+      }
+    },
+    {
+      "phrase_id": 3,
+      "reference": "Please speak a little more slowly.",
+      "audio_duration_s": 3.456,
+      "whisper": {
+        "transcription": "You speak a little more slow way.",
+        "wer": 0.5,
+        "cer": 0.2857,
+        "inference_time_s": 1.764,
+        "rtf": 0.51
+      },
+      "google": {
+        "transcription": "do you spell more slowly",
+        "wer": 0.6667,
+        "cer": 0.4643,
+        "inference_time_s": 0.891,
+        "rtf": 0.258
+      }
+    },
+    {
+      "phrase_id": 4,
+      "reference": "I ordered two coffees and a pastry.",
+      "audio_duration_s": 4.416,
+      "whisper": {
+        "transcription": "I ordered two coffees and a pastry.",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 1.745,
+        "rtf": 0.395
+      },
+      "google": {
+        "transcription": "I ordered two coffees and a pastry",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 1.064,
+        "rtf": 0.241
+      }
+    },
+    {
+      "phrase_id": 5,
+      "reference": "The temperature outside is twenty degrees today.",
+      "audio_duration_s": 5.696,
+      "whisper": {
+        "transcription": "But the temperature outside is 20°C today.",
+        "wer": 0.4286,
+        "cer": 0.3902,
+        "inference_time_s": 1.732,
+        "rtf": 0.304
+      },
+      "google": {
+        "transcription": "what's the temperature outside is 20° today",
+        "wer": 0.4286,
+        "cer": 0.439,
+        "inference_time_s": 0.99,
+        "rtf": 0.174
+      }
+    },
+    {
+      "phrase_id": 6,
+      "reference": "Tomorrow we are going to the mountains with the whole family.",
+      "audio_duration_s": 5.248,
+      "whisper": {
+        "transcription": "We are going to do the maintenance with the wall family.",
+        "wer": 0.3636,
+        "cer": 0.4,
+        "inference_time_s": 1.792,
+        "rtf": 0.342
+      },
+      "google": {
+        "transcription": "we are going to the mountains with the whole family",
+        "wer": 0.0909,
+        "cer": 0.16,
+        "inference_time_s": 1.37,
+        "rtf": 0.261
+      }
+    },
+    {
+      "phrase_id": 7,
+      "reference": "This book is very interesting and educational.",
+      "audio_duration_s": 4.16,
+      "whisper": {
+        "transcription": "This book is very interesting and antiquational.",
+        "wer": 0.1429,
+        "cer": 0.1538,
+        "inference_time_s": 1.754,
+        "rtf": 0.422
+      },
+      "google": {
+        "transcription": "Facebook is very interesting and educational",
+        "wer": 0.2857,
+        "cer": 0.1026,
+        "inference_time_s": 1.2,
+        "rtf": 0.288
+      }
+    },
+    {
+      "phrase_id": 8,
+      "reference": "Please open the window.",
+      "audio_duration_s": 2.88,
+      "whisper": {
+        "transcription": "Open the window.",
+        "wer": 0.25,
+        "cer": 0.3158,
+        "inference_time_s": 1.659,
+        "rtf": 0.576
+      },
+      "google": {
+        "transcription": "open window",
+        "wer": 0.5,
+        "cer": 0.4737,
+        "inference_time_s": 0.534,
+        "rtf": 0.185
+      }
+    },
+    {
+      "phrase_id": 9,
+      "reference": "I want to buy a train ticket for tomorrow.",
+      "audio_duration_s": 3.456,
+      "whisper": {
+        "transcription": "Dubai train ticket for tomorrow",
+        "wer": 0.5556,
+        "cer": 0.303,
+        "inference_time_s": 1.716,
+        "rtf": 0.497
+      },
+      "google": {
+        "transcription": "Dubai train ticket for tomorrow",
+        "wer": 0.5556,
+        "cer": 0.303,
+        "inference_time_s": 0.699,
+        "rtf": 0.202
+      }
+    },
+    {
+      "phrase_id": 10,
+      "reference": "I really enjoy classical music very much.",
+      "audio_duration_s": 3.584,
+      "whisper": {
+        "transcription": "I really enjoy classical music very much.",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 1.728,
+        "rtf": 0.482
+      },
+      "google": {
+        "transcription": "Marilyn Drake classical music very much",
+        "wer": 0.4286,
+        "cer": 0.3235,
+        "inference_time_s": 0.852,
+        "rtf": 0.238
+      }
+    },
+    {
+      "phrase_id": 11,
+      "reference": "The speech recognition system works very well.",
+      "audio_duration_s": 4.48,
+      "whisper": {
+        "transcription": "Picture recognition system works very well.",
+        "wer": 0.2857,
+        "cer": 0.2051,
+        "inference_time_s": 1.736,
+        "rtf": 0.388
+      },
+      "google": {
+        "transcription": "picture recognition size 10 works very well",
+        "wer": 0.5714,
+        "cer": 0.3333,
+        "inference_time_s": 1.104,
+        "rtf": 0.247
+      }
+    },
+    {
+      "phrase_id": 12,
+      "reference": "Automatic speech recognition is very useful.",
+      "audio_duration_s": 4.288,
+      "whisper": {
+        "transcription": "Automatic speech recognition is very useful.",
+        "wer": 0.0,
+        "cer": 0.0,
+        "inference_time_s": 1.711,
+        "rtf": 0.399
+      },
+      "google": {
+        "transcription": "what's my next speech recognition is very useful",
+        "wer": 0.5,
+        "cer": 0.2368,
+        "inference_time_s": 1.253,
+        "rtf": 0.292
+      }
+    },
+    {
+      "phrase_id": 13,
+      "reference": "My computer is not working correctly today.",
+      "audio_duration_s": 4.16,
+      "whisper": {
+        "transcription": "The chair is not working correctly today.",
+        "wer": 0.2857,
+        "cer": 0.25,
+        "inference_time_s": 1.77,
+        "rtf": 0.425
+      },
+      "google": {
+        "transcription": "turn it's not working characters today",
+        "wer": 0.5714,
+        "cer": 0.4444,
+        "inference_time_s": 0.737,
+        "rtf": 0.177
+      }
+    },
+    {
+      "phrase_id": 14,
+      "reference": "Please translate this sentence into English for me.",
+      "audio_duration_s": 4.416,
+      "whisper": {
+        "transcription": "Translate this sentence into English for me.",
+        "wer": 0.125,
+        "cer": 0.1395,
+        "inference_time_s": 1.747,
+        "rtf": 0.396
+      },
+      "google": {
+        "transcription": "translate this sentence into English for me",
+        "wer": 0.125,
+        "cer": 0.1395,
+        "inference_time_s": 0.898,
+        "rtf": 0.203
+      }
+    },
+    {
+      "phrase_id": 15,
+      "reference": "I finished reading the book last week.",
+      "audio_duration_s": 3.648,
+      "whisper": {
+        "transcription": "And if you're not reading the book last week",
+        "wer": 0.5714,
+        "cer": 0.3548,
+        "inference_time_s": 1.806,
+        "rtf": 0.495
+      },
+      "google": {
+        "transcription": "finish reading the book last week",
+        "wer": 0.2857,
+        "cer": 0.0968,
+        "inference_time_s": 0.938,
+        "rtf": 0.257
+      }
+    },
+    {
+      "phrase_id": 16,
+      "reference": "The computer program analyzes audio data in real time.",
+      "audio_duration_s": 5.312,
+      "whisper": {
+        "transcription": "Now you can picture our program and the license. I will do that in real time",
+        "wer": 1.0,
+        "cer": 0.6444,
+        "inference_time_s": 1.826,
+        "rtf": 0.344
+      },
+      "google": {
+        "transcription": "real time",
+        "wer": 0.7778,
+        "cer": 0.8222,
+        "inference_time_s": 1.229,
+        "rtf": 0.231
+      }
+    },
+    {
+      "phrase_id": 17,
+      "reference": "Speech recognition requires machine learning algorithms.",
+      "audio_duration_s": 5.248,
+      "whisper": {
+        "transcription": "To recognition, it requires machine learning algorithms.",
+        "wer": 0.3333,
+        "cer": 0.16,
+        "inference_time_s": 1.841,
+        "rtf": 0.351
+      },
+      "google": {
+        "transcription": "recognition requires machine learning algorithm",
+        "wer": 0.3333,
+        "cer": 0.14,
+        "inference_time_s": 1.112,
+        "rtf": 0.212
+      }
+    },
+    {
+      "phrase_id": 18,
+      "reference": "The neural model processes the acoustic signal in milliseconds.",
+      "audio_duration_s": 5.632,
+      "whisper": {
+        "transcription": "Robo-mortar process, an acoustic signal, and milliseconds.",
+        "wer": 0.6667,
+        "cer": 0.3704,
+        "inference_time_s": 1.881,
+        "rtf": 0.334
+      },
+      "google": {
+        "transcription": "Moto Christmas acoustic signal in milliseconds",
+        "wer": 0.5556,
+        "cer": 0.3889,
+        "inference_time_s": 1.367,
+        "rtf": 0.243
+      }
+    },
+    {
+      "phrase_id": 19,
+      "reference": "Word error rate measures the accuracy of the transcription.",
+      "audio_duration_s": 4.672,
+      "whisper": {
+        "transcription": "More error rate measures accuracy of the transcription.",
+        "wer": 0.2222,
+        "cer": 0.1,
+        "inference_time_s": 1.796,
+        "rtf": 0.384
+      },
+      "google": {
+        "transcription": "Arrowhead Missouri accuracy of the prescription",
+        "wer": 0.6667,
+        "cer": 0.42,
+        "inference_time_s": 1.137,
+        "rtf": 0.243
+      }
+    },
+    {
+      "phrase_id": 20,
+      "reference": "Thank you very much for your valuable help and support.",
+      "audio_duration_s": 4.48,
+      "whisper": {
+        "transcription": "Thank you very much for your well of help and support.",
+        "wer": 0.2,
+        "cer": 0.1556,
+        "inference_time_s": 1.824,
+        "rtf": 0.407
+      },
+      "google": {
+        "transcription": "thank you very much for your wallpaper support",
+        "wer": 0.3,
+        "cer": 0.2444,
+        "inference_time_s": 0.98,
+        "rtf": 0.219
+      }
+    }
+  ],
+  "summary": {
+    "whisper_avg_wer": 0.3132,
+    "whisper_avg_cer": 0.216,
+    "whisper_avg_rtf": 0.418,
+    "google_avg_wer": 0.3988,
+    "google_avg_cer": 0.2872,
+    "google_avg_rtf": 0.227
+  }
+}

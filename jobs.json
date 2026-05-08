@@ -506,5 +506,29 @@
     },
     "output_path": "D:\\voxtext\\out\\bd63afdffad04c1491ba6fee4e9404f1.mp3",
     "created_at_iso": "2026-05-01T13:51:57.096108+00:00"
+  },
+  {
+    "job_id": "e9bfff681fed424cb097bbbc4b801384",
+    "text": "Recunastrea vocala este foarte utila",
+    "interpretation": {
+      "clean_text": "Recunastrea vocala este foarte utila",
+      "language": "ro",
+      "segments": [
+        "Recunastrea vocala este foarte utila"
+      ],
+      "stats": {
+        "chars": 36,
+        "words": 5,
+        "segments": 1
+      }
+    },
+    "settings": {
+      "voice_id": null,
+      "rate": 190,
+      "volume": 0.5,
+      "lang": "ro"
+    },
+    "output_path": "D:\\voxtext\\out\\e9bfff681fed424cb097bbbc4b801384.mp3",
+    "created_at_iso": "2026-05-05T10:46:06.268389+00:00"
   }
 ]
